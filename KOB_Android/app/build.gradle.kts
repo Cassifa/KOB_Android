@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -42,4 +43,8 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
 // https://mvnrepository.com/artifact/com.squareup.okhttp3/logging-interceptor
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+
+
+    implementation ("com.google.dagger:hilt-android:2.28-alpha") // hilt的支持
+    annotationProcessor ("com.google.dagger:hilt-android-compiler:2.28-alpha") //Dagger的注解处理器APT
 }

@@ -3,62 +3,65 @@ package com.example.kob_android;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.kob_android.net.ApiService;
 
-import java.io.IOException;
 import java.util.HashMap;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
+import javax.inject.Inject;
 
+import dagger.hilt.android.AndroidEntryPoint;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+//声明可注入
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
-    Retrofit retrofit;
-    OkHttpClient okHttpClient;
+    @Inject
+    ApiService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+        //        new Thread(new Runnable() {
+        //            @Override
+        //            public void run() {
+        //                try {
+        //                    Log.i("aaa", "进入");
+        //                    Response<String> response = apiService.login("lff", "123")
+        //                            .execute();
+        //                    Log.i("aaa", "结果" + response.body());
+        //                } catch (IOException e) {
+        //                    e.printStackTrace();
+        //                    ;
+        //                }
+        //            }
+        //        }).start();
+//        apiService.login("lff", "123").enqueue(new Callback<HashMap<String, String>>() {
+//            @Override
+//            public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
+//                Log.i("aaa", "结果" + response.body().toString());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
+//
+//            }
+//        });
+        apiService.getinfo().enqueue(new Callback<HashMap<String, String>>() {
             @Override
-            public void log(@NonNull String s) {
-                Log.i("aaa", s);
+            public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
+                Log.i("aaa", "结果" + response.body().toString());
             }
-        }).setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        okHttpClient = new OkHttpClient()
-                .newBuilder()
-                .addInterceptor(interceptor)
-                .build();
-        retrofit = new Retrofit.Builder().baseUrl("http://10.200.51.93:3000/api/")
-                .client(okHttpClient)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
-
-        ApiService apiService = retrofit.create(ApiService.class);
-        HashMap<String, String> data = new HashMap<>();
-        data.put("username", "lff");
-        data.put("password", "123");
-
-        new Thread(new Runnable() {
             @Override
-            public void run() {
-                try {
-                    Log.i("aaa", "进入");
-                    Response<String> response = apiService.login("lff","123")
-                            .execute();
-                    Log.i("aaa", "结果" + response.body());
-                } catch (IOException e) {
-                    e.printStackTrace();;
-                }
+            public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
+
             }
-        }).start();
+        });
     }
 }
