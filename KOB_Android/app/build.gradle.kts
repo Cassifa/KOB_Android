@@ -44,7 +44,26 @@ dependencies {
 // https://mvnrepository.com/artifact/com.squareup.okhttp3/logging-interceptor
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
-
     implementation ("com.google.dagger:hilt-android:2.28-alpha") // hilt的支持
     annotationProcessor ("com.google.dagger:hilt-android-compiler:2.28-alpha") //Dagger的注解处理器APT
+
+    // https://mvnrepository.com/artifact/androidx.room/room-runtime
+    implementation("androidx.room:room-runtime:2.2.5")
+    annotationProcessor ("androidx.room:room-compiler:2.2.5")
+
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    compileOnly("org.projectlombok:lombok:1.18.30")
+    annotationProcessor ("org.projectlombok:lombok:1.18.22")
+
+    // https://mvnrepository.com/artifact/com.alibaba.fastjson2/fastjson2
+//    implementation("com.alibaba.fastjson2:fastjson2:2.0.38.android4")
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+    implementation("com.fasterxml.jackson.core:jackson-core:2.16.1")
+// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
+    implementation("com.fasterxml.jackson.core:jackson-annotations:2.16.1")
+// https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl
+//    implementation("org.codehaus.jackson:jackson-mapper-asl:1.9.13")
+
+
 }
