@@ -6,9 +6,7 @@ import android.util.Log;
 import com.example.kob_android.gameObjects.GameMap;
 import com.example.kob_android.gameObjects.GameObject;
 import com.example.kob_android.gameObjects.Snake;
-import com.example.kob_android.pojo.Record;
 
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,7 +22,8 @@ public class TimeThread extends Thread {
 
     public TimeThread(MySurfaceView SurfaceView, GameMap gameMap) {
         mySurfaceView = SurfaceView;
-        analysisRecord(gameMap);
+        if(gameMap.gameMapInfo.isRecord)
+            analysisRecord(gameMap);
     }
 
     private int[] parseSteps(String stepsString) {
@@ -34,8 +33,9 @@ public class TimeThread extends Thread {
         }
         return steps;
     }
+
     public void analysisRecord(GameMap gameMap) {
-        int[] k = new int[] {0};
+        int[] k = new int[]{0};
         Snake snake0 = gameMap.snakes.get(0);
         Snake snake1 = gameMap.snakes.get(1);
         String loser = gameMap.gameMapInfo.record.getLoser();
@@ -45,7 +45,7 @@ public class TimeThread extends Thread {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if (k[0] >=(a_step.length-1)) {
+                if (k[0] >= (a_step.length - 1)) {
                     if (loser.equals("all") || loser.equals("a"))
                         snake0.setStatus("die");
                     if (loser.equals("all") || loser.equals("b"))
@@ -53,9 +53,7 @@ public class TimeThread extends Thread {
                     timer.cancel();
                 } else {
                     snake0.setDirection(a_step[k[0]]);
-                    Log.i("aa",a_step[k[0]]+"");
                     snake1.setDirection(b_step[k[0]]);
-                    Log.i("bb",b_step[k[0]]+"");
                     k[0]++;
                 }
             }

@@ -20,12 +20,8 @@ import com.google.gson.GsonBuilder;
  * @Description:
  */
 public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback {
-    public Paint paint_draw;
-    public Paint paint_text;
     private boolean isRender;//控制绘画线程的标志位
-    public int width, height;
     private final TimeThread timeThread;
-//    private final Now now1 = new Now();
 
     String rac = "{\"id\":184,\"map\":\"11111111111111101000000001011000001100000110100000000101100000000000011000001100000110001000010001100000110000011000000000000110100000000101100000110000011010000000010111111111111111\",\"loser\":\"b\",\"createTime\":\"2024-01-20 13:56:32\",\"bid\":3,\"aid\":1,\"asx\":11,\"bsx\":1,\"asy\":1,\"bsy\":12,\"asteps\":\"000100301011030012\",\"bsteps\":\"222333033323221111\"}";
     GameMap gameMap =null;
@@ -34,14 +30,6 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         super(context);
         setMeasuredDimension(50, 50);
         getHolder().addCallback(this);
-        paint_draw = new Paint();
-        paint_text = new Paint();
-        width = 400;
-        height = 400;
-        paint_draw.setColor(Color.RED);
-        paint_draw.setStyle(Paint.Style.FILL);
-        paint_text.setColor(Color.YELLOW);
-        paint_text.setTextSize(50);
 
 
         Record record=new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss")

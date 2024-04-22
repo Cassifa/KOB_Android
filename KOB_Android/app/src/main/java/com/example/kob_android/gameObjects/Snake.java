@@ -29,7 +29,7 @@ public class Snake extends GameObject {
     public static double eps = 1e-2;
     public static int eye_dx[][] = {{-1, 1}, {1, 1}, {1, -1}, {-1, -1}};
     public static int eye_dy[][] = {{-1, -1}, {-1, 1}, {1, 1}, {1, -1}};
-    int eye_direction = 0;
+    int eye_direction;
     int step = 0;
     String status = "idle";
     int direction = -1;
@@ -82,10 +82,10 @@ public class Snake extends GameObject {
         double dy = nextCell.y - cells.get(0).y;
         //与目的地的距离
         double dis = Math.sqrt(dx * dx + dy * dy);
-        Log.i("showtimeDelta", timeDelta + "");
-        Log.i("showMove_dis", move_dis + "");
-        Log.i("showDx", dx + "");
-        Log.i("showDis", dis + "");
+        //        Log.i("showtimeDelta", timeDelta + "");
+        //        Log.i("showMove_dis", move_dis + "");
+        //        Log.i("showDx", dx + "");
+        //        Log.i("showDis", dis + "");
 
         if (dis < Snake.eps) {
             this.status = "idle";
@@ -97,9 +97,9 @@ public class Snake extends GameObject {
             double t = 0.1 * ((dx) / dis);
             double k = 0.1 * ((dy) / dis);
             cells.get(0).x += t;
-            Log.i("show", t + "");
+            //            Log.i("show", t + "");
             cells.get(0).y += k;
-            Log.i("show", "");
+            //            Log.i("show", "");
         }
         if (!this.check_tail_increasing()) {//不增长则尾巴缩短
             int k = this.cells.size();
@@ -109,7 +109,7 @@ public class Snake extends GameObject {
             double tdy = tail_target.y - tail.y;
 
             if (dis < Snake.eps) {
-                this.cells.remove(cells.size()-1);//尾巴已经重叠，删去
+                this.cells.remove(cells.size() - 1);//尾巴已经重叠，删去
             } else {
                 tail.x += move_dis * tdx / dis;
                 tail.y += move_dis * tdy / dis;
