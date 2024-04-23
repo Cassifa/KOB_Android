@@ -2,6 +2,7 @@ package com.example.kob_android.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kob_android.R;
+import com.example.kob_android.activity.ShowRecordActivity;
 import com.example.kob_android.gameObjects.infoUtils.Cell;
 import com.example.kob_android.net.responseData.pojo.User;
 import com.example.kob_android.pojo.Record;
@@ -30,7 +32,7 @@ import java.util.List;
  * @CreateTime: 2024-04-24  04:51
  * @Description:
  */
-public class RecordItemAdapter extends BaseAdapter {
+public class RecordItemAdapter extends BaseAdapter{
 
     private Context mContext;
     private List<RecordItem> recordItemList;
@@ -79,6 +81,19 @@ public class RecordItemAdapter extends BaseAdapter {
         recordBName.setText(recordItem.getA_username());
         Date date=recordItem.getRecord().getCreateTime();
         recordTime.setText(new SimpleDateFormat("yyyy-MM-dd").format(date));
+
+        String recordJson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd HH:mm:ss")  // 确保日期格式匹配
+                .create().toJson(recordItem.getRecord());
+Log.i("aaa",recordJson);
+        // 设置点击事件
+        view.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), ShowRecordActivity.class);
+            // 将 JSON 字符串作为意图的 Extra
+            intent.putExtra("record", recordJson);
+            v.getContext().startActivity(intent); // 启动新的 Activity
+        });
         return view;
     }
+
 }

@@ -2,9 +2,6 @@ package com.example.kob_android.gameObjects;
 
 import android.graphics.Canvas;
 
-import com.example.kob_android.MySurfaceView;
-
-import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -47,7 +44,9 @@ public class GameObject {
         }
     }
 
-    ;
+    public static void destroyAll() {
+        list.clear();
+    }
 
     public void render(Canvas canvas) {
     }

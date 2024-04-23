@@ -4,8 +4,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import com.example.kob_android.MySurfaceView;
-
 /**
  * @Author: Cassifa
  * @CreateTime: 2024-04-20  05:55

@@ -1,7 +1,6 @@
 package com.example.kob_android;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -15,14 +14,10 @@ import com.example.kob_android.fragment.RankListFragment;
 import com.example.kob_android.fragment.RecordListFragment;
 import com.example.kob_android.fragment.UserInfoFragment;
 import com.example.kob_android.net.ListApiService;
-import com.example.kob_android.net.responseData.RecordItemsData;
 
 import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 //声明可注入
 @AndroidEntryPoint

@@ -1,10 +1,10 @@
-package com.example.kob_android;
+package com.example.kob_android.gameObjects;
 
 import android.graphics.Canvas;
-import android.util.Log;
 
 import com.example.kob_android.gameObjects.GameMap;
 import com.example.kob_android.gameObjects.GameObject;
+import com.example.kob_android.gameObjects.MySurfaceView;
 import com.example.kob_android.gameObjects.Snake;
 
 import java.util.Timer;
