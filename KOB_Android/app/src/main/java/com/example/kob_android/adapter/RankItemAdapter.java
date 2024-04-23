@@ -1,5 +1,6 @@
 package com.example.kob_android.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.kob_android.R;
 import com.example.kob_android.net.responseData.pojo.User;
+import com.example.kob_android.utils.Constant;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -55,9 +57,10 @@ public class RankItemAdapter extends BaseAdapter {
         return 0;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_rank, null);
+        @SuppressLint("ViewHolder") View view = LayoutInflater.from(mContext).inflate(R.layout.item_rank, null);
         TextView userRank = view.findViewById(R.id.rankItemUserRank);
         ImageView userImage = view.findViewById(R.id.rankItemUserImage);
         TextView userName = view.findViewById(R.id.rankItemUserName);
@@ -66,64 +69,8 @@ public class RankItemAdapter extends BaseAdapter {
         userRank.setText(user.getPassword());
         userName.setText(user.getUsername());
         userRating.setText(user.getRating().toString());
-//        getHttpBitmap(userImage, user.getPhoto());
-
-        Log.i("aaa", user.getPhoto());
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL(user.getPhoto());
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("GET");
-                    connection.setConnectTimeout(5000);
-                    InputStream inputStream = connection.getInputStream();
-                    //将输入流转化为BitMap
-                    final Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    ((Activity) mContext).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            userImage.setImageBitmap(bitmap);
-                        }
-                    });
-
-                } catch (UnknownHostException e) {
-                    Log.e("RankItemAdapter", "Failed to resolve host: " + user.getPhoto(), e);
-                } catch (IOException e) {
-                    Log.e("RankItemAdapter", "Failed to get image from: " + user.getPhoto(), e);
-                }
-            }
-        }.start();
+        Constant.setHttpImg(userImage, user.getPhoto(),mContext);
         return view;
 
-    }
-
-    private void getHttpBitmap(ImageView userImage, String imagePath) {
-        Log.i("aaa", imagePath);
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL(imagePath);
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("GET");
-                    connection.setConnectTimeout(5000);
-                    InputStream inputStream = connection.getInputStream();
-                    //将输入流转化为BitMap
-                    final Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    ((Activity) mContext).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            userImage.setImageBitmap(bitmap);
-                        }
-                    });
-
-                } catch (UnknownHostException e) {
-                    Log.e("RankItemAdapter", "Failed to resolve host: " + imagePath, e);
-                } catch (IOException e) {
-                    Log.e("RankItemAdapter", "Failed to get image from: " + imagePath, e);
-                }
-            }
-        }.start();
     }
 }

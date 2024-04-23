@@ -70,5 +70,7 @@ dependencies {
 // https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl
 //    implementation("org.codehaus.jackson:jackson-mapper-asl:1.9.13")
 
+    implementation ("com.google.android.material:material:1.5.0")
+
 
 }
