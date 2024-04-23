@@ -3,16 +3,11 @@ package com.example.kob_android.gameObjects;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
 
-import com.example.kob_android.MySurfaceView;
 import com.example.kob_android.gameObjects.infoUtils.Cell;
 import com.example.kob_android.gameObjects.infoUtils.SnakeInfo;
 import com.google.gson.Gson;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -74,7 +69,6 @@ public class Snake extends GameObject {
     }
 
     private void update_move() {
-        Log.i("BB", direction + " " + snakeInfo.id);
         //允许的位移
         double move_dis = (double) (this.speed * this.timeDelta) / 1000;
         //x y 方向距离
@@ -126,7 +120,7 @@ public class Snake extends GameObject {
         int d = this.direction;
         this.eye_direction = d;
         nextCell = new Cell(cells.get(0).r + Snake.dr[d], cells.get(0).c + Snake.dc[d]);
-        Log.i("next", nextCell.toString());
+
         this.direction = -1;
         this.status = "move";//更新移动状态
         this.step++;
