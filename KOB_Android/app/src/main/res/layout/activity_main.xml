@@ -27,25 +27,25 @@
         android:layout_height="50dp">
 
         <Button
-            android:id="@+id/playground"
+            android:id="@+id/playgroundBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/ranklist"
+            android:id="@+id/rankListBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/record"
+            android:id="@+id/recordListBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/userinfo"
+            android:id="@+id/userinfoBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />

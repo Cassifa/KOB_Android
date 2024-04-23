@@ -3,6 +3,7 @@ package com.example.kob_android;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -10,6 +11,7 @@ import android.widget.FrameLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.kob_android.fragment.PlayGroundFragment;
+import com.example.kob_android.fragment.RankListFragment;
 import com.example.kob_android.fragment.UserInfoFragment;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button recordList;
     Button userInfo;
     PlayGroundFragment playGroundFragment;
+    RankListFragment rankListFragment;
     UserInfoFragment userInfoFragment;
     FragmentTransaction fragmentTransaction;
     FrameLayout mainFiled;
@@ -36,31 +39,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initListener() {
         playGround.setOnClickListener(this);
+        rankList.setOnClickListener(this);
         userInfo.setOnClickListener(this);
     }
 
     private void initView() {
-        mainFiled=(FrameLayout)findViewById(R.id.main_filed);
-        playGround = findViewById(R.id.playground);
-        rankList = findViewById(R.id.ranklist);
-        recordList = findViewById(R.id.record);
-        userInfo = findViewById(R.id.userinfo);
+        //初始化按钮
+        mainFiled = (FrameLayout) findViewById(R.id.main_filed);
+        playGround = findViewById(R.id.playgroundBtn);
+        rankList = findViewById(R.id.rankListBtn);
+        recordList = findViewById(R.id.recordListBtn);
+        userInfo = findViewById(R.id.userinfoBtn);
+
+        //初始化Fragment
         playGroundFragment = new PlayGroundFragment();
         userInfoFragment = new UserInfoFragment();
+        rankListFragment = new RankListFragment();
     }
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.playground){
+        int id = v.getId();
+        if (id == R.id.playgroundBtn) {
             replaceFragment(playGroundFragment);
-        }
-        else replaceFragment(userInfoFragment);
+        } else if (id == R.id.rankListBtn) {
+            Log.i("aaa", "aaa");
+            replaceFragment(rankListFragment);
+            Log.i("aaa", "aaa");
+        } else replaceFragment(userInfoFragment);
     }
 
     private void replaceFragment(Fragment fragment) {
         //必须全局
-        fragmentTransaction =getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.main_filed,fragment);
+        fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.main_filed, fragment);
         fragmentTransaction.commit();
     }
 
