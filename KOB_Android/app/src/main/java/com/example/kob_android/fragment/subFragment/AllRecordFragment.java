@@ -39,9 +39,9 @@ public class AllRecordFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.sub_fragment_all_record, container, false);
-        ListView rankList = view.findViewById(R.id.all_record_list);
+        ListView recordList = view.findViewById(R.id.all_record_list);
 
-        new FetchRecordTask(rankList).execute();
+        new FetchRecordTask(recordList).execute();
         return view;
     }
     private class FetchRecordTask extends AsyncTask<Void, Void, List<RecordItem>> {

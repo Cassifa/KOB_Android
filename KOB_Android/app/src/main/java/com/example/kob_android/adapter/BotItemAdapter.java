@@ -33,8 +33,6 @@ public class BotItemAdapter extends BaseAdapter {
     public BotItemAdapter(Context mContext, List<Bot> userRank) {
         this.mContext = mContext;
         this.userBotList = userRank;
-        userBotList = new LinkedList<>();
-        userBotList.add(new Bot(1, 1, "向上走", "new 描述", "aaa", new Date(), new Date()));
     }
 
     @Override
