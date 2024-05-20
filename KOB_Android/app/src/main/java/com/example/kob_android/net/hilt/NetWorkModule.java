@@ -49,7 +49,7 @@ public class NetWorkModule {
     @Singleton
     @Provides
     Retrofit provideRetrofit(OkHttpClient okHttpClient) {//自己会找上面的
-        return new Retrofit.Builder().baseUrl("http://192.168.169.88:3000/api/")
+        return new Retrofit.Builder().baseUrl("http://192.168.24.88:3000/api/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder()
                         .setDateFormat("yyyy-MM-dd HH:mm:ss")

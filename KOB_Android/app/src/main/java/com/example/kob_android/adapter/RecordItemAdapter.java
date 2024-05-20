@@ -32,11 +32,12 @@ import java.util.List;
  * @CreateTime: 2024-04-24  04:51
  * @Description:
  */
-public class RecordItemAdapter extends BaseAdapter{
+public class RecordItemAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<RecordItem> recordItemList;
-    private final String data="{\"a_photo\":\"https://cdn.acwing.com/media/user/profile/photo/144446_md_4da0fc7c25.jpg\",\"a_username\":\"lff\",\"b_photo\":\"https://ts1.cn.mm.bing.net/th?id=OIP-C.gNGfGtBM4P6hsh7taj9AqwEsEs&w=175&h=185&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2\",\"b_username\":\"麦麦\",\"record\":{\"id\":60,\"map\":\"11111111111111101000000001011000001100000111000000000011110000000000111000000000000110010000001001100000000000011100000000001111000000000011100000110000011010000000010111111111111111\",\"loser\":\"a\",\"createTime\":\"2023-04-26 21:47:32\",\"aid\":1,\"bid\":2,\"asy\":1,\"bsx\":1,\"bsteps\":\"23222330322323333\",\"asteps\":\"01000300101030300\",\"bsy\":12,\"asx\":11},\"result\":\"B胜\"}";
+    private final String data = "{\"a_photo\":\"https://cdn.acwing.com/media/user/profile/photo/144446_md_4da0fc7c25.jpg\",\"a_username\":\"lff\",\"b_photo\":\"https://ts1.cn.mm.bing.net/th?id=OIP-C.gNGfGtBM4P6hsh7taj9AqwEsEs&w=175&h=185&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2\",\"b_username\":\"麦麦\",\"record\":{\"id\":60,\"map\":\"11111111111111101000000001011000001100000111000000000011110000000000111000000000000110010000001001100000000000011100000000001111000000000011100000110000011010000000010111111111111111\",\"loser\":\"a\",\"createTime\":\"2023-04-26 21:47:32\",\"aid\":1,\"bid\":2,\"asy\":1,\"bsx\":1,\"bsteps\":\"23222330322323333\",\"asteps\":\"01000300101030300\",\"bsy\":12,\"asx\":11},\"result\":\"B胜\"}";
+
     public RecordItemAdapter(Context mContext, List<RecordItem> recordItemList) {
         this.mContext = mContext;
         recordItemList = new LinkedList<>();
@@ -45,6 +46,7 @@ public class RecordItemAdapter extends BaseAdapter{
 
         this.recordItemList = recordItemList;
     }
+
     @Override
     public int getCount() {
         return recordItemList.size();
@@ -74,18 +76,17 @@ public class RecordItemAdapter extends BaseAdapter{
 
         TextView recordTime = view.findViewById(R.id.recordItemTime);
         RecordItem recordItem = recordItemList.get(position);
-        Constant.setHttpImg(recordAImage,recordItem.getA_photo(),mContext);
+        Constant.setHttpImg(recordAImage, recordItem.getA_photo(), mContext);
         recordAName.setText(recordItem.getA_username());
         recordVS.setText("VS");
-        Constant.setHttpImg(recordBImage, recordItem.getB_photo(),mContext);
-        recordBName.setText(recordItem.getA_username());
-        Date date=recordItem.getRecord().getCreateTime();
+        Constant.setHttpImg(recordBImage, recordItem.getB_photo(), mContext);
+        recordBName.setText(recordItem.getB_username());
+        Date date = recordItem.getRecord().getCreateTime();
         recordTime.setText(new SimpleDateFormat("yyyy-MM-dd").format(date));
 
         String recordJson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")  // 确保日期格式匹配
                 .create().toJson(recordItem.getRecord());
-Log.i("aaa",recordJson);
         // 设置点击事件
         view.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), ShowRecordActivity.class);

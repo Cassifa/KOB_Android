@@ -1,5 +1,6 @@
 package com.example.kob_android.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.kob_android.MainActivity;
 import com.example.kob_android.R;
 import com.example.kob_android.net.ApiService;
 import com.example.kob_android.utils.Constant;
@@ -98,9 +100,10 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        MainActivity nowActivity=(MainActivity) getActivity();
         int id = v.getId();
         if (id == R.id.info_botList) {
-            Log.i("aaa", "a");
+                nowActivity.replaceFragment(new BotListFragment());
         } else if (id == R.id.info_logout) {
             Log.i("aaa", "b");
         } else {
