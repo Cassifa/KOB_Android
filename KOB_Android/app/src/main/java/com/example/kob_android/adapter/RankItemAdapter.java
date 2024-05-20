@@ -58,17 +58,33 @@ public class RankItemAdapter extends BaseAdapter {
     @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        @SuppressLint("ViewHolder") View view = LayoutInflater.from(mContext).inflate(R.layout.item_rank, null);
-        TextView userRank = view.findViewById(R.id.rankItemUserRank);
-        ImageView userImage = view.findViewById(R.id.rankItemUserImage);
-        TextView userName = view.findViewById(R.id.rankItemUserName);
-        TextView userRating = view.findViewById(R.id.rankItemUserRating);
+        ViewHolder viewHolder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_rank, null);
+            viewHolder = new ViewHolder();
+
+            viewHolder.userRank = convertView.findViewById(R.id.rankItemUserRank);
+            viewHolder.userImage = convertView.findViewById(R.id.rankItemUserImage);
+            viewHolder.userName = convertView.findViewById(R.id.rankItemUserName);
+            viewHolder.userRating = convertView.findViewById(R.id.rankItemUserRating);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
         User user = userRankList.get(position);
-        userRank.setText(user.getPassword());
-        userName.setText(user.getUsername());
-        userRating.setText(user.getRating().toString());
-        Constant.setHttpImg(userImage, user.getPhoto(),mContext);
-        return view;
+        viewHolder.userRank.setText(user.getPassword());
+        viewHolder.userName.setText(user.getUsername());
+        viewHolder.userRating.setText(user.getRating().toString());
+        Constant.setHttpImg(viewHolder.userImage, user.getPhoto(), mContext);
+        return convertView;
 
     }
+
+    public final class ViewHolder {
+        public TextView userRank;
+        public ImageView userImage;
+        public TextView userName;
+        public TextView userRating;
+    }
+
 }

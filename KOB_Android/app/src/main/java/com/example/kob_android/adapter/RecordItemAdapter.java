@@ -62,39 +62,93 @@ public class RecordItemAdapter extends BaseAdapter {
         return position;
     }
 
+//    @SuppressLint({"SetTextI18n", "SimpleDateFormat"})
+//    @Override
+//    public View getView(int position, View convertView, ViewGroup parent) {
+//        @SuppressLint("ViewHolder") View view = LayoutInflater.from(mContext).inflate(R.layout.item_record, null);
+//        ImageView recordAImage = view.findViewById(R.id.recordItemAImage);
+//        TextView recordAName = view.findViewById(R.id.recordItemAName);
+//
+//        TextView recordVS = view.findViewById(R.id.recordItemVS);
+//
+//        ImageView recordBImage = view.findViewById(R.id.recordItemBImage);
+//        TextView recordBName = view.findViewById(R.id.recordItemBName);
+//
+//        TextView recordTime = view.findViewById(R.id.recordItemTime);
+//        RecordItem recordItem = recordItemList.get(position);
+//        Constant.setHttpImg(recordAImage, recordItem.getA_photo(), mContext);
+//        recordAName.setText(recordItem.getA_username());
+//        recordVS.setText("VS");
+//        Constant.setHttpImg(recordBImage, recordItem.getB_photo(), mContext);
+//        recordBName.setText(recordItem.getB_username());
+//        Date date = recordItem.getRecord().getCreateTime();
+//        recordTime.setText(new SimpleDateFormat("yyyy-MM-dd").format(date));
+//
+//        String recordJson = new GsonBuilder()
+//                .setDateFormat("yyyy-MM-dd HH:mm:ss")  // 确保日期格式匹配
+//                .create().toJson(recordItem.getRecord());
+//        // 设置点击事件
+//        view.setOnClickListener(v -> {
+//            Intent intent = new Intent(v.getContext(), ShowRecordActivity.class);
+//            // 将 JSON 字符串作为意图的 Extra
+//            intent.putExtra("record", recordJson);
+//            v.getContext().startActivity(intent); // 启动新的 Activity
+//        });
+//        return view;
+//    }
+
     @SuppressLint({"SetTextI18n", "SimpleDateFormat"})
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        @SuppressLint("ViewHolder") View view = LayoutInflater.from(mContext).inflate(R.layout.item_record, null);
-        ImageView recordAImage = view.findViewById(R.id.recordItemAImage);
-        TextView recordAName = view.findViewById(R.id.recordItemAName);
+        ViewHolder viewHolder;
+        if(convertView==null){
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_record, null);
+            viewHolder=new ViewHolder();
 
-        TextView recordVS = view.findViewById(R.id.recordItemVS);
+            viewHolder.recordAImage = convertView.findViewById(R.id.recordItemAImage);
+            viewHolder.recordAName = convertView.findViewById(R.id.recordItemAName);
 
-        ImageView recordBImage = view.findViewById(R.id.recordItemBImage);
-        TextView recordBName = view.findViewById(R.id.recordItemBName);
+            viewHolder.recordVS = convertView.findViewById(R.id.recordItemVS);
 
-        TextView recordTime = view.findViewById(R.id.recordItemTime);
+            viewHolder.recordBImage = convertView.findViewById(R.id.recordItemBImage);
+            viewHolder.recordBName = convertView.findViewById(R.id.recordItemBName);
+
+            viewHolder.recordTime = convertView.findViewById(R.id.recordItemTime);
+            convertView.setTag(viewHolder);
+        }else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
         RecordItem recordItem = recordItemList.get(position);
-        Constant.setHttpImg(recordAImage, recordItem.getA_photo(), mContext);
-        recordAName.setText(recordItem.getA_username());
-        recordVS.setText("VS");
-        Constant.setHttpImg(recordBImage, recordItem.getB_photo(), mContext);
-        recordBName.setText(recordItem.getB_username());
+
+        Constant.setHttpImg(viewHolder.recordAImage, recordItem.getA_photo(), mContext);
+        viewHolder.recordAName.setText(recordItem.getA_username());
+        viewHolder.recordVS.setText("VS");
+        Constant.setHttpImg(viewHolder.recordBImage, recordItem.getB_photo(), mContext);
+        viewHolder.recordBName.setText(recordItem.getB_username());
         Date date = recordItem.getRecord().getCreateTime();
-        recordTime.setText(new SimpleDateFormat("yyyy-MM-dd").format(date));
+        viewHolder.recordTime.setText(new SimpleDateFormat("yyyy-MM-dd").format(date));
 
         String recordJson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")  // 确保日期格式匹配
                 .create().toJson(recordItem.getRecord());
         // 设置点击事件
-        view.setOnClickListener(v -> {
+        convertView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), ShowRecordActivity.class);
             // 将 JSON 字符串作为意图的 Extra
             intent.putExtra("record", recordJson);
             v.getContext().startActivity(intent); // 启动新的 Activity
         });
-        return view;
+        return convertView;
+    }
+
+    public final class ViewHolder {
+        public ImageView recordAImage;
+        public TextView recordAName;
+        public TextView recordVS;
+        public ImageView recordBImage;
+        public TextView recordBName;
+        public TextView recordTime;
     }
 
 }

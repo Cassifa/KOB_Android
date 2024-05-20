@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,24 +66,32 @@ public class BotItemAdapter extends BaseAdapter {
     @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        @SuppressLint("ViewHolder") View view = LayoutInflater.from(mContext).inflate(R.layout.item_bot, null);
-        TextView botName = view.findViewById(R.id.botItemName);
-        TextView botCreateTime = view.findViewById(R.id.botItemCreateTime);
-        Button botModify = view.findViewById(R.id.botItemModify);
-        Button botDelete = view.findViewById(R.id.botItemDelete);
+        ViewHolder viewHolder;
+        if(convertView==null){
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_bot, null);
+            viewHolder = new ViewHolder();
+
+            viewHolder.botName = convertView.findViewById(R.id.botItemName);
+            viewHolder.botCreateTime = convertView.findViewById(R.id.botItemCreateTime);
+            viewHolder.botModify = convertView.findViewById(R.id.botItemModify);
+            viewHolder.botDelete = convertView.findViewById(R.id.botItemDelete);
+            convertView.setTag(viewHolder);
+        }else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
 
         Bot bot = userBotList.get(position);
         String botJson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")  // 确保日期格式匹配
                 .create().toJson(bot);
 
-        botModify.setOnClickListener(v -> {
+        viewHolder.botModify.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, ModifyMyBotActivity.class);
             intent.putExtra("bot", botJson);
             mContext.startActivity(intent);
         });
 
-        botDelete.setOnClickListener(v -> {
+        viewHolder.botDelete.setOnClickListener(v -> {
             botApiService.remove(bot.getId().toString()).enqueue(new Callback<HashMap<String, String>>() {
                 @Override
                 public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
@@ -109,9 +118,15 @@ public class BotItemAdapter extends BaseAdapter {
             });
         });
 
-        botName.setText(bot.getTitle());
-        botCreateTime.setText(new SimpleDateFormat("yyyy-MM-dd").format(bot.getCreatetime()));
-        return view;
+        viewHolder.botName.setText(bot.getTitle());
+        viewHolder.botCreateTime.setText(new SimpleDateFormat("yyyy-MM-dd").format(bot.getCreatetime()));
+        return convertView;
 
+    }
+    public final class ViewHolder {
+        public TextView botName;
+        public TextView botCreateTime;
+        public Button botModify;
+        public Button botDelete;
     }
 }
