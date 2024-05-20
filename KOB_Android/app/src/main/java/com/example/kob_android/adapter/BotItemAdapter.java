@@ -2,6 +2,7 @@ package com.example.kob_android.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.kob_android.R;
+import com.example.kob_android.activity.ModifyMyBotActivity;
 import com.example.kob_android.net.responseData.pojo.Bot;
+import com.google.gson.GsonBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -59,6 +62,16 @@ public class BotItemAdapter extends BaseAdapter {
         Button botDelete = view.findViewById(R.id.botItemDelete);
 
         Bot bot = userBotList.get(position);
+        String botJson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd HH:mm:ss")  // 确保日期格式匹配
+                .create().toJson(bot);
+
+        botModify.setOnClickListener(v -> {
+            Intent intent=new Intent(mContext, ModifyMyBotActivity.class);
+            intent.putExtra("bot",botJson);
+            mContext.startActivity(intent);
+        });
+
         botName.setText(bot.getTitle());
         botCreateTime.setText(new SimpleDateFormat("yyyy-MM-dd").format(bot.getCreatetime()));
         return view;

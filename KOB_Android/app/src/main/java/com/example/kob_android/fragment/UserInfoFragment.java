@@ -1,6 +1,5 @@
 package com.example.kob_android.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -27,7 +25,6 @@ import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
@@ -55,6 +52,8 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.fragment_userinfo, container, false);
         initView();
         initListener();
+
+        //加载个人信息
         final Context context = requireActivity();
         new Thread(new Runnable() {
             @Override
@@ -68,6 +67,7 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener {
                         new Handler(Looper.getMainLooper()).post(new Runnable() {
                             @Override
                             public void run() {
+                                Log.i("aaa",userInfo.toString());
                                 Constant.setHttpImg(userImage, userInfo.get("photo"), context);
                                 userName.setText(userInfo.get("username"));
                                 userRating.setText(userInfo.get("rating"));
@@ -100,10 +100,10 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        MainActivity nowActivity=(MainActivity) getActivity();
+        MainActivity nowActivity = (MainActivity) getActivity();
         int id = v.getId();
         if (id == R.id.info_botList) {
-                nowActivity.replaceFragment(new BotListFragment());
+            nowActivity.replaceFragment(new BotListFragment());
         } else if (id == R.id.info_logout) {
             Log.i("aaa", "b");
         } else {
