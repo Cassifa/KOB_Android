@@ -1,24 +1,33 @@
 package com.example.kob_android.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kob_android.R;
 import com.example.kob_android.activity.ModifyMyBotActivity;
+import com.example.kob_android.net.BotApiService;
 import com.example.kob_android.net.responseData.pojo.Bot;
 import com.google.gson.GsonBuilder;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
+
+import javax.inject.Inject;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * @Author: Cassifa
@@ -29,10 +38,13 @@ public class BotItemAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<Bot> userBotList;
+    @Inject
+    BotApiService botApiService;
 
-    public BotItemAdapter(Context mContext, List<Bot> userRank) {
+    public BotItemAdapter(Context mContext, List<Bot> userRank, BotApiService botApiService) {
         this.mContext = mContext;
         this.userBotList = userRank;
+        this.botApiService = botApiService;
     }
 
     @Override
@@ -65,9 +77,36 @@ public class BotItemAdapter extends BaseAdapter {
                 .create().toJson(bot);
 
         botModify.setOnClickListener(v -> {
-            Intent intent=new Intent(mContext, ModifyMyBotActivity.class);
-            intent.putExtra("bot",botJson);
+            Intent intent = new Intent(mContext, ModifyMyBotActivity.class);
+            intent.putExtra("bot", botJson);
             mContext.startActivity(intent);
+        });
+
+        botDelete.setOnClickListener(v -> {
+            botApiService.remove(bot.getId().toString()).enqueue(new Callback<HashMap<String, String>>() {
+                @Override
+                public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
+                    HashMap<String, String> msg = response.body();
+                    final String errorMsg;
+                    if (msg != null) {
+                        errorMsg = msg.get("error_message");
+                    } else errorMsg = null;
+                    ((Activity) mContext).runOnUiThread(() -> {
+                        Toast.makeText(mContext, errorMsg, Toast.LENGTH_SHORT).show();
+                        if (errorMsg != null && errorMsg.equals("删除成功")) {
+                            userBotList.remove(position);
+                            notifyDataSetChanged();
+                        }
+                    });
+                }
+
+                @Override
+                public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
+                    ((Activity) mContext).runOnUiThread(() -> {
+                        Toast.makeText(mContext, "网络异常", Toast.LENGTH_SHORT).show();
+                    });
+                }
+            });
         });
 
         botName.setText(bot.getTitle());

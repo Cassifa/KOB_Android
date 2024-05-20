@@ -30,7 +30,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="@color/blue"/>
+            android:background="@color/blue"
+            android:textSize="24dp"
+            android:text="修改"/>
 
         <Button
             android:id="@+id/botItemDelete"
@@ -38,6 +40,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="@color/red"/>
+            android:background="@color/red"
+            android:textSize="24dp"
+            android:text="删除"/>
     </LinearLayout>
 </LinearLayout>

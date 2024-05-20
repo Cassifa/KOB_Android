@@ -12,6 +12,13 @@
     <ListView
         android:id="@+id/myBotsView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="550dp" />
+
+    <Button
+        android:id="@+id/addBot"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="添加Bot"
+        android:textSize="24dp" />
 
 </LinearLayout>
