@@ -23,4 +23,20 @@ import lombok.NoArgsConstructor;
 public class RecordItemsData {
     private LinkedList<RecordItem> records;
     private Integer record_count;
+
+    public LinkedList<RecordItem> getRecords() {
+        return records;
+    }
+
+    public void setRecords(LinkedList<RecordItem> records) {
+        this.records = records;
+    }
+
+    public Integer getRecord_count() {
+        return record_count;
+    }
+
+    public void setRecord_count(Integer record_count) {
+        this.record_count = record_count;
+    }
 }

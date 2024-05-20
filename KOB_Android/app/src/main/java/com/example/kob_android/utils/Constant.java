@@ -1,6 +1,5 @@
 package com.example.kob_android.utils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -30,9 +29,10 @@ public class Constant {
                     connection.setRequestMethod("GET");
                     connection.setConnectTimeout(5000);
                     InputStream inputStream = connection.getInputStream();
-                    //将输入流转化为BitMap
+                    // 将输入流转化为Bitmap
                     final Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    ((Activity) context).runOnUiThread(new Runnable() {
+                    // 使用ImageView的post方法在UI线程中更新UI
+                    userImage.post(new Runnable() {
                         @Override
                         public void run() {
                             userImage.setImageBitmap(bitmap);
