@@ -38,9 +38,6 @@ public class RankItemAdapter extends BaseAdapter {
     public RankItemAdapter(Context mContext, List<User> userRank) {
         this.mContext = mContext;
         this.userRankList = userRank;
-        userRankList = new LinkedList<>();
-
-        userRankList.add(new User(1, "lff", "1", 1500, "https://cdn.acwing.com/media/user/profile/photo/144446_md_4da0fc7c25.jpg"));
     }
 
     @Override
