@@ -14,6 +14,7 @@ import com.example.kob_android.R;
 import com.example.kob_android.fragment.subFragment.MatchFragment;
 import com.example.kob_android.fragment.subFragment.UserActionFragment;
 import com.example.kob_android.gameObjects.MySurfaceView;
+import com.example.kob_android.utils.Constant;
 
 import java.util.Objects;
 
@@ -54,14 +55,13 @@ public class PlayGroundFragment extends Fragment {
     private void updateMainArea(boolean isMatch) {
         //isMatch表示要匹配页面
         if (isMatch) {
-            //必须全局
+            //展示匹配Fragment
             fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.showingArea, matchFragment);
-            //不在尝试利用
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
+//            matchFragment.updateInfo(Constant.getMyInfo(),true);
             showActionArea(false);
-            //TODO:刷新自己信息
         } else {
 
         }

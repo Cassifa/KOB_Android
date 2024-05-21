@@ -3,12 +3,14 @@ package com.example.kob_android.net.responseData.pojo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * @Author: Cassifa
  * @CreateTime: 2024-04-17  21:43
  * @Description:
  */
+@ToString
 public class User {
     public User(Integer id, String username, String password, Integer rating, String photo) {
         this.id = id;

@@ -2,6 +2,7 @@ package com.example.kob_android.fragment.subFragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.example.kob_android.fragment.PlayGroundFragment;
 import com.example.kob_android.net.BotApiService;
 import com.example.kob_android.net.responseData.pojo.Bot;
 import com.example.kob_android.net.responseData.pojo.User;
+import com.example.kob_android.utils.Constant;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,6 +69,7 @@ public class MatchFragment extends Fragment {
         myPhoto = view.findViewById(R.id.currentGameMyPhoto);
         opponentName = view.findViewById(R.id.currentGameOpponentName);
         opponentPhoto = view.findViewById(R.id.currentGameOpponentPhoto);
+        updateInfo(Constant.getMyInfo(),true);
     }
 
     //刷新数据列表
@@ -88,9 +91,11 @@ public class MatchFragment extends Fragment {
     //更新用户信息
     public void updateInfo(User user, boolean isMe) {
         if (isMe) {
-
+            Constant.setHttpImg(myPhoto,user.getPhoto(),getContext());
+            myName.setText(user.getUsername());
         } else {
-
+            Constant.setHttpImg(opponentPhoto,user.getPhoto(),getContext());
+            opponentName.setText(user.getUsername());
         }
     }
 
