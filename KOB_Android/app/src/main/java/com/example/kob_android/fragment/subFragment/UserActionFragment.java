@@ -1,17 +1,21 @@
 package com.example.kob_android.fragment.subFragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.kob_android.R;
 import com.example.kob_android.fragment.PlayGroundFragment;
 
+/**
+ * @Author: Cassifa
+ * @CreateTime: 2024-05-22
+ * @Description: 向 PlayGroundFragment 返回用户移动信息
+ */
 public class UserActionFragment extends Fragment implements View.OnClickListener {
     Button up, down, left, right;
     View view;
@@ -42,14 +46,14 @@ public class UserActionFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.up) {
-
-        } else if (id == R.id.down) {
-
-        } else if (id == R.id.left) {
-
-        } else if (id == R.id.left) {
-
-        }
+        //上-0 下-2 左-3 右-1
+        if (id == R.id.up)
+            father.setDirection(0);
+        else if (id == R.id.down)
+            father.setDirection(2);
+        else if (id == R.id.left)
+            father.setDirection(3);
+        else if (id == R.id.left)
+            father.setDirection(1);
     }
 }

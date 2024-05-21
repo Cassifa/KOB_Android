@@ -2,21 +2,18 @@ package com.example.kob_android.fragment.subFragment;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.kob_android.R;
-import com.example.kob_android.adapter.BotItemAdapter;
-import com.example.kob_android.fragment.BotListFragment;
 import com.example.kob_android.fragment.PlayGroundFragment;
 import com.example.kob_android.net.BotApiService;
 import com.example.kob_android.net.responseData.pojo.Bot;
@@ -33,11 +30,18 @@ import dagger.hilt.android.AndroidEntryPoint;
 import retrofit2.Call;
 import retrofit2.Response;
 
+/**
+ * @Author: Cassifa
+ * @CreateTime: 2024-05-22
+ * @Description:
+ * 接受 PlayGroundFragment 更新信息要求 updateInfo(User user, boolean isMe)
+ * onClick 传递开始要求
+ * getCheckedBotId 返回当前出战Bot
+ */
 @AndroidEntryPoint
-public class MatchFragment extends Fragment {
+public class MatchFragment extends Fragment implements View.OnClickListener {
     @Inject
     BotApiService botApiService;
-
 
     PlayGroundFragment father;
     Spinner botSpinner;
@@ -45,6 +49,7 @@ public class MatchFragment extends Fragment {
     ImageView opponentPhoto;
     TextView myName;
     TextView opponentName;
+    Button startGameBtn;
     View view;
     int checkedBot;
 
@@ -69,7 +74,9 @@ public class MatchFragment extends Fragment {
         myPhoto = view.findViewById(R.id.currentGameMyPhoto);
         opponentName = view.findViewById(R.id.currentGameOpponentName);
         opponentPhoto = view.findViewById(R.id.currentGameOpponentPhoto);
-        updateInfo(Constant.getMyInfo(),true);
+        startGameBtn = view.findViewById(R.id.startNewGame);
+        startGameBtn.setOnClickListener(this);
+        updateInfo(Constant.getMyInfo(), true);
     }
 
     //刷新数据列表
@@ -91,12 +98,17 @@ public class MatchFragment extends Fragment {
     //更新用户信息
     public void updateInfo(User user, boolean isMe) {
         if (isMe) {
-            Constant.setHttpImg(myPhoto,user.getPhoto(),getContext());
+            Constant.setHttpImg(myPhoto, user.getPhoto(), getContext());
             myName.setText(user.getUsername());
         } else {
-            Constant.setHttpImg(opponentPhoto,user.getPhoto(),getContext());
+            Constant.setHttpImg(opponentPhoto, user.getPhoto(), getContext());
             opponentName.setText(user.getUsername());
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        father.startGame();
     }
 
 

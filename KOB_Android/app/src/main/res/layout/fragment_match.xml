@@ -6,55 +6,70 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7">
 
-            <ImageView
-                android:id="@+id/currentGameMyPhoto"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="3" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/currentGameMyName"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="自己"
-                android:textSize="24dp" />
+                <ImageView
+                    android:id="@+id/currentGameMyPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3" />
+
+                <TextView
+                    android:id="@+id/currentGameMyName"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="自己"
+                    android:textSize="24dp" />
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/currentGameBotsSpinner"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/currentGameOpponentPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3" />
+
+                <TextView
+                    android:id="@+id/currentGameOpponentName"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="对手"
+                    android:textSize="24dp" />
+            </LinearLayout>
         </LinearLayout>
 
-        <Spinner
-            android:id="@+id/currentGameBotsSpinner"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/currentGameOpponentPhoto"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="3" />
-
-            <TextView
-                android:id="@+id/currentGameOpponentName"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="对手"
-                android:textSize="24dp" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/startNewGame"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="开始游戏"
+            android:textSize="24dp" />
     </LinearLayout>
 
 </FrameLayout>

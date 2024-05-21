@@ -47,7 +47,6 @@ public class PlayGroundFragment extends Fragment {
         //准备资源
         matchFragment = new MatchFragment(this);
         userActionFragment = new UserActionFragment(this);
-//        surfaceView = new MySurfaceView(getContext(), null);
 
         updateMainArea(true);
     }
@@ -60,7 +59,7 @@ public class PlayGroundFragment extends Fragment {
             fragmentTransaction.replace(R.id.showingArea, matchFragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
-//            matchFragment.updateInfo(Constant.getMyInfo(),true);
+
             showActionArea(false);
         } else {
 
@@ -70,5 +69,11 @@ public class PlayGroundFragment extends Fragment {
     //修改是否展示上下左右移动键
     private void showActionArea(boolean isShow) {
 
+    }
+
+    public void startGame() {
+    }
+
+    public void setDirection(int direction) {
     }
 }
