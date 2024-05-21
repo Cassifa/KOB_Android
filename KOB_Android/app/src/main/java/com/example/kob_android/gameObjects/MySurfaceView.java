@@ -19,6 +19,7 @@ import com.google.gson.GsonBuilder;
  *               1.以recordData创建
  *               2.以newGameInfo（String map,int myPlaceId）创建游戏
  *               3.设置当前运动方向setDirection
+ *               4.设置游戏状态
  */
 public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback {
     private boolean isRender;//控制绘画线程的标志位
@@ -93,6 +94,11 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 
     public void setDirection(int direction) {
         timeThread.addDirectionToQueue(direction);
+    }
+    public void setGameStatus(String status){
+        if(status.equals("a"))timeThread.setGameStatus(1);
+        else if(status.equals("b"))timeThread.setGameStatus(2);
+        else timeThread.setGameStatus(3);
     }
 
     class RenderThread extends Thread {

@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @Author: Cassifa
@@ -16,6 +17,9 @@ public class TimeThread extends Thread {
     GameMap gameMap;
     boolean flag = true;
     ArrayBlockingQueue<Integer> nowAim;
+
+    //仅在新游戏中生效，用于检测游戏胜负 0-未结束 1-a输了 2-b输了 3-全输了
+    private final AtomicInteger gameStatus = new AtomicInteger(0);
 
     public TimeThread(MySurfaceView SurfaceView, GameMap gameMap) {
         mySurfaceView = SurfaceView;
@@ -62,6 +66,13 @@ public class TimeThread extends Thread {
             try {
                 if (!gameMap.gameMapInfo.isRecord) {
                     processNowAimQueue();
+                    int status = gameStatus.get();
+                    if (status != 0) {
+                        if (status == 1 || status == 3)
+                            gameMap.snakes.get(0).setStatus("die");
+                        if (status == 2 || status == 3)
+                            gameMap.snakes.get(1).setStatus("die");
+                    }
                 }
                 //每秒刷新60次动画
                 sleep(1000 / 60);
@@ -83,7 +94,9 @@ public class TimeThread extends Thread {
             e.printStackTrace();
         }
     }
-
+    public void setGameStatus(int status) {
+        gameStatus.set(status);
+    }
     public void addDirectionToQueue(int direction) {
         try {
             nowAim.put(direction); // 使用 put 方法来添加元素
