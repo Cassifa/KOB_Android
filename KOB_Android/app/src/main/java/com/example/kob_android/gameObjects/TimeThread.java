@@ -2,13 +2,9 @@ package com.example.kob_android.gameObjects;
 
 import android.graphics.Canvas;
 
-import com.example.kob_android.gameObjects.GameMap;
-import com.example.kob_android.gameObjects.GameObject;
-import com.example.kob_android.gameObjects.MySurfaceView;
-import com.example.kob_android.gameObjects.Snake;
-
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * @Author: Cassifa
@@ -16,25 +12,22 @@ import java.util.TimerTask;
  * @Description:
  */
 public class TimeThread extends Thread {
-    private final MySurfaceView mySurfaceView;
-    private boolean flag = true;
-
+    final MySurfaceView mySurfaceView;
+    GameMap gameMap;
+    boolean flag = true;
+    ArrayBlockingQueue<Integer> nowAim;
 
     public TimeThread(MySurfaceView SurfaceView, GameMap gameMap) {
         mySurfaceView = SurfaceView;
-        if(gameMap.gameMapInfo.isRecord)
-            analysisRecord(gameMap);
+        this.gameMap = gameMap;
+        //解析回放
+        if (gameMap.gameMapInfo.isRecord)
+            analysisRecord();
+
     }
 
-    private int[] parseSteps(String stepsString) {
-        int[] steps = new int[stepsString.length()];
-        for (int i = 0; i < stepsString.length(); i++) {
-            steps[i] = Integer.parseInt(String.valueOf(stepsString.charAt(i)));
-        }
-        return steps;
-    }
 
-    public void analysisRecord(GameMap gameMap) {
+    public void analysisRecord() {
         int[] k = new int[]{0};
         Snake snake0 = gameMap.snakes.get(0);
         Snake snake1 = gameMap.snakes.get(1);
@@ -60,17 +53,52 @@ public class TimeThread extends Thread {
         }, 0, 350);
     }
 
+
     @Override
+    //执行渲染并在新游戏时更新方向
     public void run() {
         while (flag) {
             GameObject.step(System.currentTimeMillis());
             try {
+                if (!gameMap.gameMapInfo.isRecord) {
+                    processNowAimQueue();
+                }
                 //每秒刷新60次动画
                 sleep(1000 / 60);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    private void processNowAimQueue() {
+        try {
+            // 从队列中获取方向
+            Integer direction = nowAim.poll();
+            if (direction != null) {
+                // 控制自己的方向
+                gameMap.snakes.get(gameMap.gameMapInfo.placeId).setDirection(direction);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addDirectionToQueue(int direction) {
+        try {
+            nowAim.put(direction); // 使用 put 方法来添加元素
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private int[] parseSteps(String stepsString) {
+        int[] steps = new int[stepsString.length()];
+        for (int i = 0; i < stepsString.length(); i++) {
+            steps[i] = Integer.parseInt(String.valueOf(stepsString.charAt(i)));
+        }
+        return steps;
     }
 
     public void render(Canvas canvas) {

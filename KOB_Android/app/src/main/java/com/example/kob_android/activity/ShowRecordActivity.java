@@ -25,7 +25,7 @@ public class ShowRecordActivity extends Activity {
         FrameLayout surfaceViewContainer = findViewById(R.id.surface_view_container);
 
         // 创建 MySurfaceView 并添加到容器中
-        MySurfaceView mySurfaceView = new MySurfaceView(this,recordData);
+        MySurfaceView mySurfaceView = new MySurfaceView(this,recordData,null);
         surfaceViewContainer.addView(mySurfaceView);
 
     }
