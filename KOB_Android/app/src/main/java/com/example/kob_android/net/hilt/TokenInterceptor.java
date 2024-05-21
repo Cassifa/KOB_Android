@@ -25,7 +25,7 @@ public class TokenInterceptor implements Interceptor {
         // 添加 Authorization 头部
         Request.Builder requestBuilder = originalRequest.newBuilder()
                 .header("Authorization", "Bearer " +
-                        "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJhZTYwYTViNTMyNTY0OWUxYTVhN2M4YzM5ZDk5NjE4MCIsInN1YiI6IjEiLCJpc3MiOiJzZyIsImlhdCI6MTcxNjIyNTI5MCwiZXhwIjoxNzE3NDM0ODkwfQ.hK3ue0xbFlN4yXhC4iaBwvtzmQUINNcjWbkTTh_IwzE");
+                        "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzMjNmYjNjMDc0N2I0OTdhYmQ3ZjgwNDdhMGYzMjhhMyIsInN1YiI6IjEiLCJpc3MiOiJzZyIsImlhdCI6MTcxNjI3OTQwMiwiZXhwIjoxNzE3NDg5MDAyfQ.-PTXxXsrhGByTrr_t5MKqd82HzHyGProg1_MRLxJFzI");
 
         Request requestWithAuth = requestBuilder.build();
 

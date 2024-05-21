@@ -18,7 +18,7 @@
     <FrameLayout
         android:id="@+id/main_filed"
         android:layout_width="match_parent"
-        android:layout_height="640dp"
+        android:layout_height="660dp"
         android:background="@color/white">
 
     </FrameLayout>
@@ -31,24 +31,32 @@
             android:id="@+id/playgroundBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="开始"
+            android:textSize="24dp" />
 
         <Button
             android:id="@+id/rankListBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="排行"
+            android:textSize="24dp" />
 
         <Button
             android:id="@+id/recordListBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="回放"
+            android:textSize="24dp" />
 
         <Button
             android:id="@+id/userinfoBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="我的"
+            android:textSize="24dp" />
     </LinearLayout>
 </LinearLayout>

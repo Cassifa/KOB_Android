@@ -62,41 +62,6 @@ public class RecordItemAdapter extends BaseAdapter {
         return position;
     }
 
-//    @SuppressLint({"SetTextI18n", "SimpleDateFormat"})
-//    @Override
-//    public View getView(int position, View convertView, ViewGroup parent) {
-//        @SuppressLint("ViewHolder") View view = LayoutInflater.from(mContext).inflate(R.layout.item_record, null);
-//        ImageView recordAImage = view.findViewById(R.id.recordItemAImage);
-//        TextView recordAName = view.findViewById(R.id.recordItemAName);
-//
-//        TextView recordVS = view.findViewById(R.id.recordItemVS);
-//
-//        ImageView recordBImage = view.findViewById(R.id.recordItemBImage);
-//        TextView recordBName = view.findViewById(R.id.recordItemBName);
-//
-//        TextView recordTime = view.findViewById(R.id.recordItemTime);
-//        RecordItem recordItem = recordItemList.get(position);
-//        Constant.setHttpImg(recordAImage, recordItem.getA_photo(), mContext);
-//        recordAName.setText(recordItem.getA_username());
-//        recordVS.setText("VS");
-//        Constant.setHttpImg(recordBImage, recordItem.getB_photo(), mContext);
-//        recordBName.setText(recordItem.getB_username());
-//        Date date = recordItem.getRecord().getCreateTime();
-//        recordTime.setText(new SimpleDateFormat("yyyy-MM-dd").format(date));
-//
-//        String recordJson = new GsonBuilder()
-//                .setDateFormat("yyyy-MM-dd HH:mm:ss")  // 确保日期格式匹配
-//                .create().toJson(recordItem.getRecord());
-//        // 设置点击事件
-//        view.setOnClickListener(v -> {
-//            Intent intent = new Intent(v.getContext(), ShowRecordActivity.class);
-//            // 将 JSON 字符串作为意图的 Extra
-//            intent.putExtra("record", recordJson);
-//            v.getContext().startActivity(intent); // 启动新的 Activity
-//        });
-//        return view;
-//    }
-
     @SuppressLint({"SetTextI18n", "SimpleDateFormat"})
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -151,4 +116,38 @@ public class RecordItemAdapter extends BaseAdapter {
         public TextView recordTime;
     }
 
+    //    @SuppressLint({"SetTextI18n", "SimpleDateFormat"})
+    //    @Override
+    //    public View getView(int position, View convertView, ViewGroup parent) {
+    //        @SuppressLint("ViewHolder") View view = LayoutInflater.from(mContext).inflate(R.layout.item_record, null);
+    //        ImageView recordAImage = view.findViewById(R.id.recordItemAImage);
+    //        TextView recordAName = view.findViewById(R.id.recordItemAName);
+    //
+    //        TextView recordVS = view.findViewById(R.id.recordItemVS);
+    //
+    //        ImageView recordBImage = view.findViewById(R.id.recordItemBImage);
+    //        TextView recordBName = view.findViewById(R.id.recordItemBName);
+    //
+    //        TextView recordTime = view.findViewById(R.id.recordItemTime);
+    //        RecordItem recordItem = recordItemList.get(position);
+    //        Constant.setHttpImg(recordAImage, recordItem.getA_photo(), mContext);
+    //        recordAName.setText(recordItem.getA_username());
+    //        recordVS.setText("VS");
+    //        Constant.setHttpImg(recordBImage, recordItem.getB_photo(), mContext);
+    //        recordBName.setText(recordItem.getB_username());
+    //        Date date = recordItem.getRecord().getCreateTime();
+    //        recordTime.setText(new SimpleDateFormat("yyyy-MM-dd").format(date));
+    //
+    //        String recordJson = new GsonBuilder()
+    //                .setDateFormat("yyyy-MM-dd HH:mm:ss")  // 确保日期格式匹配
+    //                .create().toJson(recordItem.getRecord());
+    //        // 设置点击事件
+    //        view.setOnClickListener(v -> {
+    //            Intent intent = new Intent(v.getContext(), ShowRecordActivity.class);
+    //            // 将 JSON 字符串作为意图的 Extra
+    //            intent.putExtra("record", recordJson);
+    //            v.getContext().startActivity(intent); // 启动新的 Activity
+    //        });
+    //        return view;
+    //    }
 }
