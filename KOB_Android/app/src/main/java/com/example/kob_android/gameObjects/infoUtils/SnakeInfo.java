@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 //@AllArgsConstructor
 @NoArgsConstructor
 public class SnakeInfo {
+
     public int id;
     public double r;
     public double c;

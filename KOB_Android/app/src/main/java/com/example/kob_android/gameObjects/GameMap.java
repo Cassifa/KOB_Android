@@ -25,8 +25,8 @@ public class GameMap extends GameObject {
     public GameMap(GameMapInfo info) {
         super();
         gameMapInfo = info;
-        snakes.add(new Snake(new SnakeInfo(rows - 2, 1, 0, Color.parseColor("#4876EC")), this));
-        snakes.add(new Snake(new SnakeInfo(1, cols - 2, 1, Color.parseColor("#F94848")), this));
+        snakes.addLast(new Snake(new SnakeInfo(rows - 2, 1, 0, Color.parseColor("#4876EC")), this));
+        snakes.addLast(new Snake(new SnakeInfo(1, cols - 2, 1, Color.parseColor("#F94848")), this));
     }
 
     @Override

@@ -10,7 +10,6 @@
         android:gravity="center"
         android:text="对局重现"
         android:textSize="30dp">
-
     </TextView>
 
     <FrameLayout

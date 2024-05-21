@@ -1,11 +1,13 @@
 package com.example.kob_android.gameObjects;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.example.kob_android.gameObjects.infoUtils.GameMapInfo;
 import com.example.kob_android.gameObjects.infoUtils.StartGameInfo;
@@ -24,6 +26,7 @@ import com.google.gson.GsonBuilder;
 public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback {
     private boolean isRender;//控制绘画线程的标志位
     private final TimeThread timeThread;
+    Activity activity;
 
     GameMap gameMap;
 
@@ -31,6 +34,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         super(context);
         setMeasuredDimension(50, 50);
         getHolder().addCallback(this);
+        activity=(Activity) context;
 
         int rows = 13; // 行数
         int cols = 14; // 列数
@@ -60,9 +64,9 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
                 }
             }
             gameMap = new GameMap(
-                    new GameMapInfo(false, null, 1, array, 900 * 1.0, 900 * 1.0));
+                    new GameMapInfo(false, null, nowInfo.getMyPlaceId(), array, 900 * 1.0, 900 * 1.0));
         }
-        timeThread = new TimeThread(this, gameMap);
+        timeThread = new TimeThread(this, gameMap,activity);
     }
 
     @Override
@@ -92,8 +96,8 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         }
     }
 
-    public void setDirection(int direction) {
-        timeThread.addDirectionToQueue(direction);
+    public void setDirection(int direction,int player) {
+        timeThread.addDirectionToQueue(direction,player);
     }
     public void setGameStatus(String status){
         if(status.equals("a"))timeThread.setGameStatus(1);
@@ -105,7 +109,12 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         @Override
         public void run() {
             while (isRender) {
-                doDraw();
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        doDraw();
+                    }
+                });
                 try {
                     //每秒绘制60次
                     sleep(1000 / 60);
@@ -116,9 +125,17 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         }
     }
 
+
     private void doDraw() {
         Canvas canvas = getHolder().lockCanvas();
-        timeThread.render(canvas);
-        getHolder().unlockCanvasAndPost(canvas);
+        if (canvas != null) {
+            try {
+                timeThread.render(canvas);
+            } finally {
+                // 释放画布并提交绘制内容
+                getHolder().unlockCanvasAndPost(canvas);
+            }
+        }
     }
+
 }

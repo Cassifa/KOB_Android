@@ -52,6 +52,7 @@ public class Constant {
 
     public static User getMyInfo() {
         User user = new User();
+        user.setId(1);
         user.setUsername("飞飞");
         user.setPhoto("https://cdn.acwing.com/media/user/profile/photo/144446_md_4da0fc7c25.jpg");
         Log.i("aaa", user.toString());

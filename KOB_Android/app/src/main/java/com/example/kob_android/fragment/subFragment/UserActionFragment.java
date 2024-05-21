@@ -29,6 +29,7 @@ public class UserActionFragment extends Fragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_user_action, container, false);
         initBtn();
+        view.setVisibility(View.GONE);
         return view;
     }
 
@@ -53,7 +54,7 @@ public class UserActionFragment extends Fragment implements View.OnClickListener
             father.setDirection(2);
         else if (id == R.id.left)
             father.setDirection(3);
-        else if (id == R.id.left)
+        else if (id == R.id.right)
             father.setDirection(1);
     }
 }

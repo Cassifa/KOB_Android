@@ -27,14 +27,14 @@
             android:id="@+id/right"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:text="下"
+            android:text="右"
             android:textSize="24dp" />
 
         <Button
             android:id="@+id/down"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:text="右"
+            android:text="下"
             android:textSize="24dp" />
     </LinearLayout>
 </FrameLayout>

@@ -10,9 +10,9 @@ import lombok.ToString;
 @ToString
 public class StartGameInfo {
     String map;
-    String myPlaceId;
+    int myPlaceId;
 
-    public StartGameInfo(String map, String myPlaceId) {
+    public StartGameInfo(String map, int myPlaceId) {
         this.map = map;
         this.myPlaceId = myPlaceId;
     }
@@ -25,11 +25,11 @@ public class StartGameInfo {
         this.map = map;
     }
 
-    public String getMyPlaceId() {
+    public int getMyPlaceId() {
         return myPlaceId;
     }
 
-    public void setMyPlaceId(String myPlaceId) {
+    public void setMyPlaceId(int myPlaceId) {
         this.myPlaceId = myPlaceId;
     }
 }

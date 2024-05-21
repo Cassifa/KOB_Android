@@ -33,10 +33,10 @@ import retrofit2.Response;
 /**
  * @Author: Cassifa
  * @CreateTime: 2024-05-22
- * @Description:
- * 接受 PlayGroundFragment 更新信息要求 updateInfo(User user, boolean isMe)
+ * @Description: 接受 PlayGroundFragment 更新信息要求 updateInfo(User user, boolean isMe)
  * onClick 传递开始要求
  * getCheckedBotId 返回当前出战Bot
+ * 切换开始/停止匹配
  */
 @AndroidEntryPoint
 public class MatchFragment extends Fragment implements View.OnClickListener {
@@ -52,6 +52,7 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
     Button startGameBtn;
     View view;
     int checkedBot;
+    boolean startMatch;
 
     List<Bot> bots;
 
@@ -65,6 +66,7 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.fragment_match, container, false);
         initView();
         refreshSpinner();
+        startMatch = true;
         return view;
     }
 
@@ -108,7 +110,16 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        father.startGame();
+        if (startMatch) father.startMatch();
+        else father.cancelMatch();
+    }
+
+    //修改开始匹配/停止匹配
+    public void shift() {
+
+        startMatch = !startMatch;
+        if (startMatch) startGameBtn.setText("开始匹配");
+        else startGameBtn.setText("取消匹配");
     }
 
 

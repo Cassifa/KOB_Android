@@ -1,10 +1,13 @@
 package com.example.kob_android.gameObjects;
 
+import android.app.Activity;
 import android.graphics.Canvas;
+import android.util.Log;
 
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -16,18 +19,24 @@ public class TimeThread extends Thread {
     final MySurfaceView mySurfaceView;
     GameMap gameMap;
     boolean flag = true;
-    ArrayBlockingQueue<Integer> nowAim;
+    ConcurrentLinkedQueue<Integer> nowAimA;
+    ConcurrentLinkedQueue<Integer> nowAimB;
+    Activity activity;
 
     //仅在新游戏中生效，用于检测游戏胜负 0-未结束 1-a输了 2-b输了 3-全输了
     private final AtomicInteger gameStatus = new AtomicInteger(0);
 
-    public TimeThread(MySurfaceView SurfaceView, GameMap gameMap) {
+    public TimeThread(MySurfaceView SurfaceView, GameMap gameMap, Activity activity) {
         mySurfaceView = SurfaceView;
+        this.activity = activity;
         this.gameMap = gameMap;
         //解析回放
         if (gameMap.gameMapInfo.isRecord)
             analysisRecord();
-
+        else {
+            nowAimA = new ConcurrentLinkedQueue<>();
+            nowAimB = new ConcurrentLinkedQueue<>();
+        }
     }
 
 
@@ -58,11 +67,17 @@ public class TimeThread extends Thread {
     }
 
 
-    @Override
     //执行渲染并在新游戏时更新方向
+    @Override
     public void run() {
         while (flag) {
-            GameObject.step(System.currentTimeMillis());
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    GameObject.step(System.currentTimeMillis());
+                }
+            });
+
             try {
                 if (!gameMap.gameMapInfo.isRecord) {
                     processNowAimQueue();
@@ -82,27 +97,27 @@ public class TimeThread extends Thread {
         }
     }
 
+
+    // 使用 poll() 方法从队列中获取元素
     private void processNowAimQueue() {
-        try {
-            // 从队列中获取方向
-            Integer direction = nowAim.poll();
-            if (direction != null) {
-                // 控制自己的方向
-                gameMap.snakes.get(gameMap.gameMapInfo.placeId).setDirection(direction);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        Integer direction = nowAimA.poll();
+        if (direction != null) {
+            gameMap.snakes.get(0).setDirection(direction);
+        }
+        Integer direction2 = nowAimB.poll();
+        if (direction2 != null) {
+            gameMap.snakes.get(1).setDirection(direction2);
         }
     }
+
     public void setGameStatus(int status) {
         gameStatus.set(status);
     }
-    public void addDirectionToQueue(int direction) {
-        try {
-            nowAim.put(direction); // 使用 put 方法来添加元素
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+    public void addDirectionToQueue(int direction, int player) {
+            if (player == 0) nowAimA.offer(direction); // 使用 put 方法来添加元素
+            else nowAimB.offer(direction);;
+            Log.i("WebSocket", "ADD " + player + " " + direction + " ");
     }
 
 
