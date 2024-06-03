@@ -1,6 +1,8 @@
 package com.example.kob_android.activity;
 
+import com.example.kob_android.MyApplication;
 import com.example.kob_android.R;
+import com.example.kob_android.net.responseData.pojo.User;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,14 +22,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button btnRegiste;
     private Button btnUp;
     private TextView textView;
+    User user;
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        user= MyApplication.getInstance().user;
+        if(user.getUsername()!=null&&user.getPassword()!=null)
+            tryLogin(user.getUsername(),user.getPassword());
         setContentView(R.layout.activity_login);
         initView();
     }
 
+    private void tryLogin(String username, String password) {
+    }
+
+    private void successfulLoginCallBack(){
+
+    }
     private void initView() {
         imageView = (ImageView) findViewById(R.id.imageView);
         etUsername = (EditText) findViewById(R.id.et_username);
