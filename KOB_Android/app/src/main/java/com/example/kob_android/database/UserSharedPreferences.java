@@ -42,6 +42,12 @@ public class UserSharedPreferences {
         editor.commit();
     }
 
+    public void refreshBotId(int botId) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("botId", botId);
+        editor.commit();
+    }
+
     public User getUser() {
         Integer id = preferences.getString("id", null) == null ? null : Integer.getInteger(Objects.requireNonNull(preferences.getString("id", null)));
         Integer rating = preferences.getString("rating", null) == null ? null : Integer.getInteger(Objects.requireNonNull(preferences.getString("rating", null)));
@@ -58,5 +64,9 @@ public class UserSharedPreferences {
 
     public String getToken() {
         return preferences.getString("token", null);
+    }
+
+    public int getBotId() {
+        return preferences.getInt("botId", -1);
     }
 }

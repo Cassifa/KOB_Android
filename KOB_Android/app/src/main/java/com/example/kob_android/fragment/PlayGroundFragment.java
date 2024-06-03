@@ -7,11 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.kob_android.R;
 import com.example.kob_android.database.RecordItemDBHelper;
+import com.example.kob_android.database.UserSharedPreferences;
 import com.example.kob_android.fragment.subFragment.MatchFragment;
 import com.example.kob_android.fragment.subFragment.UserActionFragment;
 import com.example.kob_android.gameObjects.MySurfaceView;
@@ -97,14 +99,13 @@ public class PlayGroundFragment extends Fragment {
     private WebSocketListener createListener() {
         return new WebSocketListener() {
             @Override
-            public void onOpen(WebSocket webSocket, Response response) {
+            public void onOpen(@NonNull WebSocket webSocket, @NonNull Response response) {
                 super.onOpen(webSocket, response);
-                Log.d("WebSocket", "open:" + response.toString());
                 mWebSocket = webSocket;
             }
 
             @Override
-            public void onMessage(WebSocket webSocket, String text) {
+            public void onMessage(@NonNull WebSocket webSocket, @NonNull String text) {
                 super.onMessage(webSocket, text);
                 JSONObject jsonObject;
                 try {
@@ -118,95 +119,100 @@ public class PlayGroundFragment extends Fragment {
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
-                Log.i("WebSocket", msg);
+
                 //判断消息类型
-                if (msg.equals("start-matching")) {
-                    JSONObject data;
-                    String opponent_username, opponent_photo;
-                    try {
-                        data = jsonObject.getJSONObject("game");
-                        opponent_photo = jsonObject.getString("opponent_photo");
-                        opponent_username = jsonObject.getString("opponent_username");
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                    //更新对手信息
-                    User opponent = new User();
-                    opponent.setPhoto(opponent_photo);
-                    opponent.setUsername((opponent_username));
-                    matchFragment.updateInfo(opponent, false);
-                    //开始游戏
-                    int a_id;
-                    String map;
-                    try {
-                        a_id = data.getInt("a_id");
-                        map = data.getString("game_map");
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                    String newMap = "";
-                    for (int i = 0; i < map.length(); i++) {
-                        char c = map.charAt(i);
-                        if (c == '0' || c == '1') newMap += c;
-                    }
-                    if (a_id == Constant.getMyInfo().getId()) startGame(newMap, 0);
-                    else startGame(newMap, 1);
+                switch (msg) {
+                    case "start-matching":
+                        JSONObject data;
+                        String opponent_username, opponent_photo;
+                        //解析对手个人信息
+                        try {
+                            data = jsonObject.getJSONObject("game");
+                            opponent_photo = jsonObject.getString("opponent_photo");
+                            opponent_username = jsonObject.getString("opponent_username");
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                        //更新对手信息
+                        User opponent = new User();
+                        opponent.setPhoto(opponent_photo);
+                        opponent.setUsername((opponent_username));
+                        matchFragment.updateInfo(opponent, false);
+                        //开始游戏
+                        int a_id;
+                        String map;
+                        try {
+                            a_id = data.getInt("a_id");
+                            map = data.getString("game_map");
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                        String newMap = "";
+                        for (int i = 0; i < map.length(); i++) {
+                            char c = map.charAt(i);
+                            if (c == '0' || c == '1') newMap += c;
+                        }
+                        if (a_id == Constant.getMyInfo().getId()) startGame(newMap, 0);
+                        else startGame(newMap, 1);
 
-                    Log.i("WebSocket", "a_id: " + a_id + " map " + map);
-                }//接到移动信息
-                else if (msg.equals("move")) {
+                        break;
+                    //接到移动信息
+                    case "move":
 
-                    int a_direction, b_direction;
-                    try {
-                        a_direction = jsonObject.getInt("a_direction");
-                        b_direction = jsonObject.getInt("b_direction");
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                    surfaceView.setDirection(a_direction, 0);
-                    surfaceView.setDirection(b_direction, 1);
+                        int a_direction, b_direction;
+                        try {
+                            a_direction = jsonObject.getInt("a_direction");
+                            b_direction = jsonObject.getInt("b_direction");
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                        surfaceView.setDirection(a_direction, 0);
+                        surfaceView.setDirection(b_direction, 1);
 
-                    Log.i("WebSocket", "a_direction:" + a_direction + " " + b_direction);
-                } else if (msg.equals("result")) {
-                    String loser;
-                    JSONObject item;
-                    try {
-                        //获取失败方与对局记录
-                        loser = jsonObject.getString("loser");
-                        item = jsonObject.getJSONObject("recordItem");
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                    Log.i("WebSocket", "loser:" + loser);
-                    surfaceView.setGameStatus(loser);
+                        Log.i("WebSocket", "a_direction:" + a_direction + " " + b_direction);
+                        break;
+                    //拿到游戏结果
+                    case "result":
+                        String loser;
+                        JSONObject item;
+                        try {
+                            //获取失败方与对局记录
+                            loser = jsonObject.getString("loser");
+                            item = jsonObject.getJSONObject("recordItem");
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                        Log.i("WebSocket", "loser:" + loser);
+                        surfaceView.setGameStatus(loser);
 
-                    try {
-                        if (item.getBoolean("msg")) saveToSQLLite(item);
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
+                        try {
+                            if (item.getBoolean("msg")) saveToSQLLite(item);
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
                 }
             }
 
             @Override
-            public void onMessage(WebSocket webSocket, ByteString bytes) {
+            public void onMessage(@NonNull WebSocket webSocket, @NonNull ByteString bytes) {
                 super.onMessage(webSocket, bytes);
             }
 
             @Override
-            public void onClosing(WebSocket webSocket, int code, String reason) {
+            public void onClosing(@NonNull WebSocket webSocket, int code, @NonNull String reason) {
                 super.onClosing(webSocket, code, reason);
                 Log.d("WebSocket", "Closing: " + code + " / " + reason);
             }
 
             @Override
-            public void onClosed(WebSocket webSocket, int code, String reason) {
+            public void onClosed(@NonNull WebSocket webSocket, int code, @NonNull String reason) {
                 super.onClosed(webSocket, code, reason);
                 Log.d("WebSocket", "Closed: " + code + " / " + reason);
             }
 
             @Override
-            public void onFailure(WebSocket webSocket, Throwable t, Response response) {
+            public void onFailure(@NonNull WebSocket webSocket, @NonNull Throwable t, Response response) {
                 super.onFailure(webSocket, t, response);
                 Log.e("WebSocket", "Error: " + t.getMessage(), t);
             }
@@ -237,10 +243,8 @@ public class PlayGroundFragment extends Fragment {
             mHelper.insert(recordItem);
         } catch (JsonSyntaxException e) {
             Log.e("GsonError", "JSON 解析错误: " + e.getMessage());
-            Log.e("GsonError", "错误的 JSON 数据: " + item.toString());
         } catch (JSONException e) {
             Log.e("JsonError", "JSON 解析错误: " + e.getMessage());
-            Log.e("JsonError", "错误的 JSON 数据: " + item.toString());
         }
     }
 
@@ -264,12 +268,9 @@ public class PlayGroundFragment extends Fragment {
             fragmentTransaction.commit();
             showActionArea(false);
         } else {
-            requireActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    showingLayout.removeAllViews();
-                    showingLayout.addView(surfaceView);
-                }
+            requireActivity().runOnUiThread(() -> {
+                showingLayout.removeAllViews();
+                showingLayout.addView(surfaceView);
             });
             if (matchFragment.getCheckedBotId() == -1)
                 showActionArea(true);
@@ -280,16 +281,13 @@ public class PlayGroundFragment extends Fragment {
     //修改是否展示上下左右移动键
     private void showActionArea(boolean isShow) {
         if (userActionFragment != null && userActionFragment.getView() != null) {
-            requireActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (isShow) {
-                        // 显示 userActionFragment
-                        userActionFragment.getView().setVisibility(View.VISIBLE);
-                    } else {
-                        // 隐藏 userActionFragment
-                        userActionFragment.getView().setVisibility(View.GONE);
-                    }
+            requireActivity().runOnUiThread(() -> {
+                if (isShow) {
+                    // 显示 userActionFragment
+                    userActionFragment.getView().setVisibility(View.VISIBLE);
+                } else {
+                    // 隐藏 userActionFragment
+                    userActionFragment.getView().setVisibility(View.GONE);
                 }
             });
         }
@@ -305,6 +303,7 @@ public class PlayGroundFragment extends Fragment {
         try {
             jsonObject.put("event", "start-matching");
             jsonObject.put("bot_id", matchFragment.getCheckedBotId());
+            UserSharedPreferences.getInstance().refreshBotId(matchFragment.getCheckedBotId());
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
