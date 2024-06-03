@@ -49,7 +49,7 @@ public class PlayGroundFragment extends Fragment {
     FrameLayout showingLayout;
     FrameLayout actionLayout;
     FragmentTransaction fragmentTransaction;
-    final String url = "ws://10.136.13.117:3000/websocket/" + "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkNDUxM2I1MDJkZjA0NTZkYWE4MTgyYzAzYWNjNTU3MyIsInN1YiI6IjEiLCJpc3MiOiJzZyIsImlhdCI6MTcxNzM5ODI2OCwiZXhwIjoxNzE4NjA3ODY4fQ.pFG_F-YFCgKw49hghIaF0t2wi3__TLfmT8ebovn3nIA";
+    final String url = "ws://192.168.223.88:3000/websocket/" + "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkNDUxM2I1MDJkZjA0NTZkYWE4MTgyYzAzYWNjNTU3MyIsInN1YiI6IjEiLCJpc3MiOiJzZyIsImlhdCI6MTcxNzM5ODI2OCwiZXhwIjoxNzE4NjA3ODY4fQ.pFG_F-YFCgKw49hghIaF0t2wi3__TLfmT8ebovn3nIA";
     WebSocket mWebSocket;
     RecordItemDBHelper mHelper;
 
@@ -214,7 +214,6 @@ public class PlayGroundFragment extends Fragment {
     }
 
     private void saveToSQLLite(JSONObject item) {
-        Log.i("ttt", item.toString());
 
         try {
             // 提取 record 字段
@@ -236,7 +235,6 @@ public class PlayGroundFragment extends Fragment {
 
             // 保存到数据库
             mHelper.insert(recordItem);
-            Log.i("aaa", "保存数据：" + item);
         } catch (JsonSyntaxException e) {
             Log.e("GsonError", "JSON 解析错误: " + e.getMessage());
             Log.e("GsonError", "错误的 JSON 数据: " + item.toString());

@@ -29,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @InstallIn(ApplicationComponent.class)
 @Module
 public class NetWorkModule {
-    final String ipAddress="10.136.13.117";
+    final String ipAddress="192.168.223.88";
     @Singleton
     @Provides
     OkHttpClient provideOkHttpClient() {

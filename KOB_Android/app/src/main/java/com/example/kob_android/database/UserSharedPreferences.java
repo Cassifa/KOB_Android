@@ -3,8 +3,11 @@ package com.example.kob_android.database;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.example.kob_android.net.responseData.pojo.User;
+
+import java.util.Objects;
 
 /**
  * @Author: Cassifa
@@ -12,11 +15,10 @@ import com.example.kob_android.net.responseData.pojo.User;
  * @Description: 做数据存贮与保存配置的工作
  */
 public class UserSharedPreferences {
-    private static UserSharedPreferences mPreferences = null;
+    private static UserSharedPreferences mPreferences = new UserSharedPreferences();
     private SharedPreferences preferences;
 
     public static void initInstance(Application application) {
-
         mPreferences.preferences = application.getSharedPreferences("config", Context.MODE_PRIVATE);
     }
 
@@ -26,6 +28,7 @@ public class UserSharedPreferences {
 
     //更新储存数据
     public void refreshUser(User user) {
+        Log.i("aaakkk", user.toString());
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("id", user.getId().toString());
         editor.putString("userName", user.getUsername());
@@ -42,17 +45,20 @@ public class UserSharedPreferences {
     }
 
     public User getUser() {
+        Integer id = preferences.getString("id", null) == null ? null : Integer.getInteger(Objects.requireNonNull(preferences.getString("id", null)));
+        Integer rating = preferences.getString("rating", null) == null ? null : Integer.getInteger(Objects.requireNonNull(preferences.getString("rating", null)));
+
         User user = new User(
-                Integer.getInteger(preferences.getString("id",null)),
-                preferences.getString("userName",null),
-                preferences.getString("userPassword",null),
-                Integer.getInteger(preferences.getString("rating",null)),
-                preferences.getString("photo",null)
+                id,
+                preferences.getString("userName", null),
+                preferences.getString("userPassword", null),
+                rating,
+                preferences.getString("photo", null)
         );
         return user;
     }
 
     public String getToken() {
-        return preferences.getString("token",null);
+        return preferences.getString("token", null);
     }
 }

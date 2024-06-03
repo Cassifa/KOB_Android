@@ -24,6 +24,7 @@ public interface ApiService {
     Call<HashMap<String,String>> register(@Query("username") String username,
                           @Query("password") String password,
                           @Query("confirmedPassword") String confirmedPassword);
+
     @GET("user/account/info/")
     Call<HashMap<String,String>> getinfo();
 }
