@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.example.kob_android.database.UserSharedPreferences;
 import com.example.kob_android.net.responseData.pojo.User;
 
 import java.io.IOException;
@@ -58,4 +59,12 @@ public class Constant {
         Log.i("aaa", user.toString());
         return user;
     }
+
+    public static String getBackIpAddress(){
+        return "192.168.223.88";
+    }
+    public static String getWebSocketUrl(){
+        return "ws://"+getBackIpAddress()+":3000/websocket/" + UserSharedPreferences.getInstance().getToken();
+    }
+
 }

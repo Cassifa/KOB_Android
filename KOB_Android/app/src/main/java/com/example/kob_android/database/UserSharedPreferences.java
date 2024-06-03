@@ -3,7 +3,6 @@ package com.example.kob_android.database;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.example.kob_android.net.responseData.pojo.User;
 
@@ -15,7 +14,7 @@ import java.util.Objects;
  * @Description: 做数据存贮与保存配置的工作
  */
 public class UserSharedPreferences {
-    private static UserSharedPreferences mPreferences = new UserSharedPreferences();
+    private static final UserSharedPreferences mPreferences = new UserSharedPreferences();
     private SharedPreferences preferences;
 
     public static void initInstance(Application application) {
@@ -28,7 +27,6 @@ public class UserSharedPreferences {
 
     //更新储存数据
     public void refreshUser(User user) {
-        Log.i("aaakkk", user.toString());
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("id", user.getId().toString());
         editor.putString("userName", user.getUsername());
