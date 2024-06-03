@@ -29,13 +29,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @InstallIn(ApplicationComponent.class)
 @Module
 public class NetWorkModule {
+    final String ipAddress="10.136.13.117";
     @Singleton
     @Provides
     OkHttpClient provideOkHttpClient() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(@NonNull String s) {
-                Log.i("aaa", s);
+                Log.i("aaa", "请求日志"+s);
             }
         }).setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -49,7 +50,7 @@ public class NetWorkModule {
     @Singleton
     @Provides
     Retrofit provideRetrofit(OkHttpClient okHttpClient) {//自己会找上面的
-        return new Retrofit.Builder().baseUrl("http://192.168.10.88:3000/api/")
+        return new Retrofit.Builder().baseUrl("http://"+ipAddress+":3000/api/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder()
                         .setDateFormat("yyyy-MM-dd HH:mm:ss")

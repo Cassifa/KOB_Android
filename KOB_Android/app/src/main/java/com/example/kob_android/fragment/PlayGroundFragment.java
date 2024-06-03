@@ -11,13 +11,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.kob_android.R;
+import com.example.kob_android.database.RecordItemDBHelper;
 import com.example.kob_android.fragment.subFragment.MatchFragment;
 import com.example.kob_android.fragment.subFragment.UserActionFragment;
 import com.example.kob_android.gameObjects.MySurfaceView;
 import com.example.kob_android.gameObjects.infoUtils.StartGameInfo;
 import com.example.kob_android.net.responseData.pojo.User;
+import com.example.kob_android.pojo.RecordItem;
 import com.example.kob_android.utils.Constant;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,8 +47,9 @@ public class PlayGroundFragment extends Fragment {
     FrameLayout showingLayout;
     FrameLayout actionLayout;
     FragmentTransaction fragmentTransaction;
-    final String url = "ws://192.168.10.88:3000/websocket/" + "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzMjNmYjNjMDc0N2I0OTdhYmQ3ZjgwNDdhMGYzMjhhMyIsInN1YiI6IjEiLCJpc3MiOiJzZyIsImlhdCI6MTcxNjI3OTQwMiwiZXhwIjoxNzE3NDg5MDAyfQ.-PTXxXsrhGByTrr_t5MKqd82HzHyGProg1_MRLxJFzI/";
+    final String url = "ws://10.136.13.117:3000/websocket/" + "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkNDUxM2I1MDJkZjA0NTZkYWE4MTgyYzAzYWNjNTU3MyIsInN1YiI6IjEiLCJpc3MiOiJzZyIsImlhdCI6MTcxNzM5ODI2OCwiZXhwIjoxNzE4NjA3ODY4fQ.pFG_F-YFCgKw49hghIaF0t2wi3__TLfmT8ebovn3nIA";
     WebSocket mWebSocket;
+    RecordItemDBHelper mHelper;
 
     @androidx.annotation.Nullable
     @Override
@@ -53,6 +57,20 @@ public class PlayGroundFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_playground, container, false);
         initView();
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        //获取数据库实例
+        mHelper = RecordItemDBHelper.getInstance(getContext());
+        mHelper.openWriteLink();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mHelper.closeLink();
     }
 
     private void initView() {
@@ -149,14 +167,22 @@ public class PlayGroundFragment extends Fragment {
                     Log.i("WebSocket", "a_direction:" + a_direction + " " + b_direction);
                 } else if (msg.equals("result")) {
                     String loser;
+                    JSONObject item;
                     try {
+                        //获取失败方与对局记录
                         loser = jsonObject.getString("loser");
+                        item = jsonObject.getJSONObject("recordItem");
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
-
                     Log.i("WebSocket", "loser:" + loser);
                     surfaceView.setGameStatus(loser);
+
+                    try {
+                        if (item.getBoolean("msg")) saveToSQLLite(item);
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
 
@@ -183,6 +209,13 @@ public class PlayGroundFragment extends Fragment {
                 Log.e("WebSocket", "Error: " + t.getMessage(), t);
             }
         };
+    }
+
+    private void saveToSQLLite(JSONObject item) {
+        RecordItem recordItem = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss")
+                .create().fromJson(item.toString(), RecordItem.class);
+        mHelper.insert(recordItem);
+        Log.i("aaa","保存数据："+item);
     }
 
     //开始游戏

@@ -17,6 +17,8 @@ import okhttp3.Response;
  * @Description:
  */
 public class TokenInterceptor implements Interceptor {
+
+    final String token="eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkNDUxM2I1MDJkZjA0NTZkYWE4MTgyYzAzYWNjNTU3MyIsInN1YiI6IjEiLCJpc3MiOiJzZyIsImlhdCI6MTcxNzM5ODI2OCwiZXhwIjoxNzE4NjA3ODY4fQ.pFG_F-YFCgKw49hghIaF0t2wi3__TLfmT8ebovn3nIA";
     @NonNull
     @Override
     public Response intercept(Chain chain) throws IOException {
@@ -24,8 +26,7 @@ public class TokenInterceptor implements Interceptor {
 
         // 添加 Authorization 头部
         Request.Builder requestBuilder = originalRequest.newBuilder()
-                .header("Authorization", "Bearer " +
-                        "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIzMjNmYjNjMDc0N2I0OTdhYmQ3ZjgwNDdhMGYzMjhhMyIsInN1YiI6IjEiLCJpc3MiOiJzZyIsImlhdCI6MTcxNjI3OTQwMiwiZXhwIjoxNzE3NDg5MDAyfQ.-PTXxXsrhGByTrr_t5MKqd82HzHyGProg1_MRLxJFzI");
+                .header("Authorization", "Bearer " + token);
 
         Request requestWithAuth = requestBuilder.build();
 
