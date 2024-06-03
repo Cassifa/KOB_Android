@@ -2,14 +2,21 @@ package com.example.kob_android.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
+import com.example.kob_android.gameObjects.infoUtils.StartGameInfo;
 import com.example.kob_android.net.responseData.pojo.User;
+import com.example.kob_android.pojo.Record;
 import com.example.kob_android.pojo.RecordItem;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * @Author: Cassifa
@@ -71,13 +78,37 @@ public class RecordItemDBHelper extends SQLiteOpenHelper {
     }
 
     public void insert(RecordItem item) {
+        Log.i("kkk", item.toString());
         ContentValues values = new ContentValues();
         values.put("a_photo", item.getA_photo());
         values.put("a_username", item.getA_username());
         values.put("b_photo", item.getB_photo());
         values.put("b_username", item.getB_username());
-        values.put("record", new Gson().toJson(item.getRecord()));
+        values.put("record", new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(item.getRecord()));
         values.put("result", item.getResult());
         mWDB.insert(TABLE_NAME, null, values);
+    }
+
+    public ArrayList<RecordItem> select(int myId) {
+        ArrayList<RecordItem> list = new ArrayList<>();
+        Cursor cursor = mRDB.query(TABLE_NAME, null, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+            Log.i("aaa",cursor.toString());
+            Record record = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss")
+                    .create().fromJson(cursor.getString(4), Record.class);
+            Log.i("aaa",record.toString());
+            if (record.getAid() != myId && record.getBid() != myId) continue;
+            RecordItem recordItem = new RecordItem(
+                    cursor.getString(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    record,
+                    cursor.getString(5)
+            );
+            list.add(recordItem);
+        }
+        cursor.close();
+        return list;
     }
 }

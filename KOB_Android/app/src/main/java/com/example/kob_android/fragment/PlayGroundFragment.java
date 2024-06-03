@@ -17,10 +17,12 @@ import com.example.kob_android.fragment.subFragment.UserActionFragment;
 import com.example.kob_android.gameObjects.MySurfaceView;
 import com.example.kob_android.gameObjects.infoUtils.StartGameInfo;
 import com.example.kob_android.net.responseData.pojo.User;
+import com.example.kob_android.pojo.Record;
 import com.example.kob_android.pojo.RecordItem;
 import com.example.kob_android.utils.Constant;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -212,11 +214,38 @@ public class PlayGroundFragment extends Fragment {
     }
 
     private void saveToSQLLite(JSONObject item) {
-        RecordItem recordItem = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss")
-                .create().fromJson(item.toString(), RecordItem.class);
-        mHelper.insert(recordItem);
-        Log.i("aaa","保存数据："+item);
+        Log.i("ttt", item.toString());
+
+        try {
+            // 提取 record 字段
+            String recordJsonString = item.getString("record");
+            Log.i("RecordJson", recordJsonString); // 打印 record 字段的 JSON 数据
+
+            // 解析 record 字段
+            Record record = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss")
+                    .create().fromJson(recordJsonString, Record.class);
+
+            // 创建 RecordItem 对象
+            RecordItem recordItem = new RecordItem();
+            recordItem.setA_photo(item.getString("a_photo"));
+            recordItem.setA_username(item.getString("a_username"));
+            recordItem.setB_photo(item.getString("b_photo"));
+            recordItem.setB_username(item.getString("b_username"));
+            recordItem.setRecord(record);
+            recordItem.setResult(item.getString("result"));
+
+            // 保存到数据库
+            mHelper.insert(recordItem);
+            Log.i("aaa", "保存数据：" + item);
+        } catch (JsonSyntaxException e) {
+            Log.e("GsonError", "JSON 解析错误: " + e.getMessage());
+            Log.e("GsonError", "错误的 JSON 数据: " + item.toString());
+        } catch (JSONException e) {
+            Log.e("JsonError", "JSON 解析错误: " + e.getMessage());
+            Log.e("JsonError", "错误的 JSON 数据: " + item.toString());
+        }
     }
+
 
     //开始游戏
     private void startGame(String map, int myPlaceId) {

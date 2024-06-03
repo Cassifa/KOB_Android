@@ -16,14 +16,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Record {
     private Integer id;
-    private Integer aid;
-    private Integer asx;
-    private Integer asy;
-    private Integer bid;
-    private Integer bsx;
-    private Integer bsy;
-    private String asteps;
-    private String bsteps;
+    private Integer AId;
+    private Integer ASx;
+    private Integer ASy;
+    private Integer BId;
+    private Integer BSx;
+    private Integer BSy;
+    private String ASteps;
+    private String BSteps;
     private String map;
     private String loser;
 //    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "Asia/Shanghai")
@@ -42,67 +42,67 @@ public class Record {
     }
 
     public Integer getAid() {
-        return aid;
+        return AId;
     }
 
     public void setAid(Integer aid) {
-        this.aid = aid;
+        this.AId = aid;
     }
 
     public Integer getAsx() {
-        return asx;
+        return ASx;
     }
 
     public void setAsx(Integer asx) {
-        this.asx = asx;
+        this.ASx = asx;
     }
 
     public Integer getAsy() {
-        return asy;
+        return ASy;
     }
 
     public void setAsy(Integer asy) {
-        this.asy = asy;
+        this.ASy = asy;
     }
 
     public Integer getBid() {
-        return bid;
+        return BId;
     }
 
     public void setBid(Integer bid) {
-        this.bid = bid;
+        this.BId = bid;
     }
 
     public Integer getBsx() {
-        return bsx;
+        return BSx;
     }
 
     public void setBsx(Integer bsx) {
-        this.bsx = bsx;
+        this.BSx = bsx;
     }
 
     public Integer getBsy() {
-        return bsy;
+        return BSy;
     }
 
     public void setBsy(Integer bsy) {
-        this.bsy = bsy;
+        this.BSy = bsy;
     }
 
     public String getAsteps() {
-        return asteps;
+        return ASteps;
     }
 
     public void setAsteps(String asteps) {
-        this.asteps = asteps;
+        this.ASteps = asteps;
     }
 
     public String getBsteps() {
-        return bsteps;
+        return BSteps;
     }
 
     public void setBsteps(String bsteps) {
-        this.bsteps = bsteps;
+        this.BSteps = bsteps;
     }
 
     public void setMap(String map) {
