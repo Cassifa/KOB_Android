@@ -1,11 +1,10 @@
 package com.example.kob_android.net.hilt;
 
-import android.content.SharedPreferences;
-
 import androidx.annotation.NonNull;
 
+import com.example.kob_android.database.UserSharedPreferences;
+
 import java.io.IOException;
-import java.util.HashSet;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -18,15 +17,15 @@ import okhttp3.Response;
  */
 public class TokenInterceptor implements Interceptor {
 
-    final String token="eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkNDUxM2I1MDJkZjA0NTZkYWE4MTgyYzAzYWNjNTU3MyIsInN1YiI6IjEiLCJpc3MiOiJzZyIsImlhdCI6MTcxNzM5ODI2OCwiZXhwIjoxNzE4NjA3ODY4fQ.pFG_F-YFCgKw49hghIaF0t2wi3__TLfmT8ebovn3nIA";
     @NonNull
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request originalRequest = chain.request();
 
         // 添加 Authorization 头部
-        Request.Builder requestBuilder = originalRequest.newBuilder()
-                .header("Authorization", "Bearer " + token);
+        Request.Builder requestBuilder = originalRequest.newBuilder();
+        if (UserSharedPreferences.getInstance().getToken() != null)
+            requestBuilder.header("Authorization", "Bearer " + UserSharedPreferences.getInstance().getToken());
 
         Request requestWithAuth = requestBuilder.build();
 

@@ -2,6 +2,7 @@ package com.example.kob_android.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,10 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.kob_android.MainActivity;
-import com.example.kob_android.MyApplication;
 import com.example.kob_android.R;
 import com.example.kob_android.database.UserSharedPreferences;
 import com.example.kob_android.net.ApiService;
@@ -55,7 +56,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         } else {
             //使用存储数据尝试登录
-            if (MyApplication.getInstance().token != null) {
+            if (UserSharedPreferences.getInstance().getToken() != null) {
                 updateUserInfo();
             } else {
                 //没有token
@@ -69,9 +70,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //通过用户名密码登录并刷新token
         apiService.login(username, password).enqueue(new Callback<HashMap<String, String>>() {
             @Override
-            public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
+            public void onResponse(@NonNull Call<HashMap<String, String>> call, @NonNull Response<HashMap<String, String>> response) {
                 HashMap<String, String> data = response.body();
-                String msg = data.get("error_message");
+                String msg = null;
+                if (data != null) {
+                    msg = data.get("error_message");
+                }
                 //登录成功跳转转页面并且刷新数据
                 if (msg != null && msg.equals("success")) {
                     String token = data.get("token");
@@ -88,7 +92,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onFailure(Call<HashMap<String, String>> call, Throwable t) {}
+            public void onFailure(@NonNull Call<HashMap<String, String>> call, @NonNull Throwable t) {}
         });
     }
 
@@ -103,7 +107,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void updateUserInfo() {
         apiService.getinfo().enqueue(new Callback<HashMap<String, String>>() {
             @Override
-            public void onResponse(Call<HashMap<String, String>> call, Response<HashMap<String, String>> response) {
+            public void onResponse(@NonNull Call<HashMap<String, String>> call, @NonNull Response<HashMap<String, String>> response) {
                 HashMap<String, String> data = response.body();
                 if (data != null) {
                     user.setId(Integer.parseInt(Objects.requireNonNull(data.get("id"))));
@@ -114,6 +118,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     UserSharedPreferences preferences = UserSharedPreferences.getInstance();
                     preferences.refreshUser(user);
 
+                    Log.i("aakk", user.toString());
+
                     // 登录成功，跳转到 MainActivity 并清除当前任务栈
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -123,7 +129,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onFailure(Call<HashMap<String, String>> call, Throwable t) {
+            public void onFailure(@NonNull Call<HashMap<String, String>> call, @NonNull Throwable t) {
                 //token失效
                 UserSharedPreferences.getInstance().refreshToken(null);
                 //自动认证失败，渲染登录页面
@@ -152,6 +158,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             //点击注册按钮，跳转进入注册页面
             startActivity(new Intent(this, RegisterActivity.class));
         } else if (id == R.id.btn_up) {
+            if (etPassword.getText().toString().trim().isEmpty() | etUsername.getText().toString().trim().isEmpty()) {
+                Toast.makeText(this, "用户名密码不能为空", Toast.LENGTH_LONG).show();
+                return;
+            }
             tryLogin(etUsername.getText().toString().trim(), etPassword.getText().toString().trim());
         }
     }

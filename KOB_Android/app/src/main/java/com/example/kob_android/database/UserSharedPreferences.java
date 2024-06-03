@@ -28,38 +28,48 @@ public class UserSharedPreferences {
     //更新储存数据
     public void refreshUser(User user) {
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("id", user.getId().toString());
-        editor.putString("userName", user.getUsername());
-        editor.putString("userPassword", user.getPassword());
-        editor.putString("rating", user.getRating().toString());
-        editor.putString("photo", user.getPhoto());
-        editor.commit();
+        if (user == null) {
+            editor.remove("id");
+            editor.remove("userName");
+            editor.remove("userPassword");
+            editor.remove("rating");
+            editor.remove("photo");
+        } else {
+            editor.putString("id", user.getId().toString());
+            editor.putString("userName", user.getUsername());
+            editor.putString("userPassword", user.getPassword());
+            editor.putString("rating", user.getRating().toString());
+            editor.putString("photo", user.getPhoto());
+        }
+        editor.apply();
     }
 
     public void refreshToken(String token) {
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("token", token);
-        editor.commit();
+        if (token == null)
+            editor.remove("token");
+        else
+            editor.putString("token", token);
+        editor.apply();
     }
 
     public void refreshBotId(int botId) {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("botId", botId);
-        editor.commit();
+        editor.apply();
     }
 
     public User getUser() {
         Integer id = preferences.getString("id", null) == null ? null : Integer.getInteger(Objects.requireNonNull(preferences.getString("id", null)));
         Integer rating = preferences.getString("rating", null) == null ? null : Integer.getInteger(Objects.requireNonNull(preferences.getString("rating", null)));
 
-        User user = new User(
+        return new User(
                 id,
                 preferences.getString("userName", null),
                 preferences.getString("userPassword", null),
                 rating,
                 preferences.getString("photo", null)
         );
-        return user;
     }
 
     public String getToken() {

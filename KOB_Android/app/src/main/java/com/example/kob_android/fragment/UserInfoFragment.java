@@ -1,6 +1,9 @@
 package com.example.kob_android.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -15,6 +18,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.kob_android.MainActivity;
 import com.example.kob_android.R;
+import com.example.kob_android.activity.LoginActivity;
+import com.example.kob_android.database.UserSharedPreferences;
 import com.example.kob_android.net.ApiService;
 import com.example.kob_android.utils.Constant;
 
@@ -64,14 +69,10 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener {
                     if (response.isSuccessful() && response.body() != null) {
                         userInfo = response.body();
                         // 回到主线程更新UI
-                        new Handler(Looper.getMainLooper()).post(new Runnable() {
-                            @Override
-                            public void run() {
-                                Log.i("aaa",userInfo.toString());
-                                Constant.setHttpImg(userImage, userInfo.get("photo"), context);
-                                userName.setText(userInfo.get("username"));
-                                userRating.setText(userInfo.get("rating"));
-                            }
+                        new Handler(Looper.getMainLooper()).post(() -> {
+                            Constant.setHttpImg(userImage, userInfo.get("photo"), context);
+                            userName.setText(userInfo.get("username"));
+                            userRating.setText(userInfo.get("rating"));
                         });
                     }
                 } catch (IOException e) {
@@ -103,11 +104,31 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener {
         MainActivity nowActivity = (MainActivity) getActivity();
         int id = v.getId();
         if (id == R.id.info_botList) {
-            nowActivity.replaceFragment(new BotListFragment());
+            if (nowActivity != null) {
+                nowActivity.replaceFragment(new BotListFragment());
+            }
         } else if (id == R.id.info_logout) {
-            Log.i("aaa", "b");
+            // 点击注销按钮，弹出对话框询问用户是否确定退出登录
+            new AlertDialog.Builder(requireContext())
+                    .setTitle("确认退出登录")
+                    .setMessage("确定要退出登录吗？")
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //清除数据
+                            UserSharedPreferences.getInstance().refreshUser(null);
+                            UserSharedPreferences.getInstance().refreshToken(null);
+                            //回到登录页面
+                            Intent intent = new Intent(requireContext(), LoginActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton("取消", null)
+                    .show();
         } else {
-            Log.i("aaa", "c");
+            Log.i("aaa", "点了修改主题色");
         }
     }
+
 }

@@ -11,13 +11,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.kob_android.R;
 import com.example.kob_android.adapter.RankItemAdapter;
-import com.example.kob_android.adapter.RecordItemAdapter;
-import com.example.kob_android.fragment.subFragment.AllRecordFragment;
 import com.example.kob_android.net.ListApiService;
 import com.example.kob_android.net.responseData.RankListData;
-import com.example.kob_android.net.responseData.RecordItemsData;
 import com.example.kob_android.net.responseData.pojo.User;
-import com.example.kob_android.pojo.RecordItem;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,8 +43,9 @@ public class RankListFragment extends Fragment {
         new FetchRecordTask(rankList).execute();
         return view;
     }
+
     private class FetchRecordTask extends AsyncTask<Void, Void, List<User>> {
-        private ListView rankList;
+        private final ListView rankList;
 
         FetchRecordTask(ListView rankList) {
             this.rankList = rankList;
