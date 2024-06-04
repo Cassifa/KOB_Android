@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Record {
     private Integer id;
-    private Integer AId;
+    private Integer aId;
     private Integer ASx;
     private Integer ASy;
     private Integer BId;
@@ -42,11 +42,11 @@ public class Record {
     }
 
     public Integer getAid() {
-        return AId;
+        return aId;
     }
 
     public void setAid(Integer aid) {
-        this.AId = aid;
+        this.aId = aid;
     }
 
     public Integer getAsx() {

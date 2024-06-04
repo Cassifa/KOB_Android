@@ -4,55 +4,99 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!-- 头像、昵称和积分信息 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="170dp">
+        android:layout_height="170dp"
+        android:orientation="horizontal">
 
+        <!-- 头像 -->
+        <!-- 头像 -->
         <ImageView
             android:id="@+id/info_userImage"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2">
+            android:layout_weight="1"
+            android:scaleType="centerCrop" />
 
-        </ImageView>
-
+        <!-- 昵称和积分信息 -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:orientation="vertical">
 
+            <!-- 昵称 -->
             <TextView
                 android:id="@+id/info_userName"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2"/>
+                android:layout_weight="1"
+                android:text="昵称"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"/>
 
+            <!-- 积分 -->
             <TextView
                 android:id="@+id/info_userRating"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2" />
-
+                android:layout_weight="1"
+                android:text="积分: 100"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"/>
         </LinearLayout>
     </LinearLayout>
 
+    <!-- 分割线 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black" />
+
+    <!-- 我的Bot -->
     <TextView
         android:id="@+id/info_botList"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="我的Bot"
-        android:textSize="40dp" />
+        android:textSize="20sp"
+        android:padding="16dp" />
+
+    <!-- 分割线 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black" />
+
+    <!-- 退出登录 -->
     <TextView
         android:id="@+id/info_logout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="退出登录"
-        android:textSize="40dp" />
+        android:textSize="20sp"
+        android:padding="16dp" />
+
+    <!-- 分割线 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black" />
+
+    <!-- 修改主题色 -->
     <TextView
         android:id="@+id/info_changeColor"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="修改主题色"
-        android:textSize="40dp" />
+        android:textSize="20sp"
+        android:padding="16dp" />
 </LinearLayout>

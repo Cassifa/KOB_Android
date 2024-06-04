@@ -55,7 +55,7 @@ public class RankListFragment extends Fragment {
         protected List<User> doInBackground(Void... voids) {
             List<User> rankList = new ArrayList<>();
             try {
-                Call<RankListData> call = listApiService.getRankList(1);
+                Call<RankListData> call = listApiService.getRankList(-1);
                 Response<RankListData> response = call.execute();
                 if (response.isSuccessful() && response.body() != null) {
                     RankListData rankListData = response.body();

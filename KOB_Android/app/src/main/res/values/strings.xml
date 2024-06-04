@@ -2,7 +2,12 @@
     <string name="app_name">KOB_Android</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="app_version">version: 1.0.0 Beta</string>
+    <string name="app_version">version: 1.0</string>
     <string name="long_label">使用上次Bot出战</string>
     <string name="short_label">快速对战</string>
+
+    <string name="playground">开始</string>
+    <string name="rank_list">排行</string>
+    <string name="record_list">回放</string>
+    <string name="user_info">我的</string>
 </resources>

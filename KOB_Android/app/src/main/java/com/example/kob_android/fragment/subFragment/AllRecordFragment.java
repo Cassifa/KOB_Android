@@ -55,7 +55,7 @@ public class AllRecordFragment extends Fragment {
         protected List<RecordItem> doInBackground(Void... voids) {
             List<RecordItem> recordItemList = new ArrayList<>();
             try {
-                Call<RecordItemsData> call = listApiService.getRecordList(1);
+                Call<RecordItemsData> call = listApiService.getRecordList(-1);
                 Response<RecordItemsData> response = call.execute();
                 if (response.isSuccessful() && response.body() != null) {
                     RecordItemsData recordItemsData = response.body();

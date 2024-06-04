@@ -8,55 +8,43 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center"
         android:text="King of Bots"
-        android:textSize="30dp">
-
-    </TextView>
+        android:textSize="30dp"/>
 
     <FrameLayout
         android:id="@+id/main_filed"
         android:layout_width="match_parent"
-        android:layout_height="660dp"
-        android:background="@color/white">
-
-    </FrameLayout>
+        android:layout_height="0dp"
+        android:layout_weight="11"
+        android:background="@color/white"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <Button
             android:id="@+id/playgroundBtn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="开始"
-            android:textSize="24dp" />
+            style="@style/BottomButtonStyle"
+            android:text="@string/playground"/>
 
         <Button
             android:id="@+id/rankListBtn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="排行"
-            android:textSize="24dp" />
+            style="@style/BottomButtonStyle"
+            android:text="@string/rank_list"/>
 
         <Button
             android:id="@+id/recordListBtn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="回放"
-            android:textSize="24dp" />
+            style="@style/BottomButtonStyle"
+            android:text="@string/record_list"/>
 
         <Button
             android:id="@+id/userinfoBtn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="我的"
-            android:textSize="24dp" />
+            style="@style/BottomButtonStyle"
+            android:text="@string/user_info"/>
     </LinearLayout>
+
 </LinearLayout>

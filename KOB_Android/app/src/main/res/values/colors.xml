@@ -14,4 +14,13 @@
     <color name="blue_500">#97d8c4</color>
     <color name="blue_700">#6b9ac4</color>
     <color name="blue_900">#3f58ad</color>
+
+
+    <color name="button_background">#6b9ac4</color>
+    <color name="button_text_color">#FFFFFF</color>
+
+    <color name="edittext_background">#e8fff3</color>
+    <color name="text_primary">#FF000000</color>
+
+    <color name="light_blue">#ADD8E6</color> <!-- 淡蓝色 -->
 </resources>

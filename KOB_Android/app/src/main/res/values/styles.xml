@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BottomButtonStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">24dp</item>
+        <item name="android:background">@color/button_background</item>
+        <item name="android:textColor">@color/button_text_color</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <!-- TextView 样式 -->
+    <style name="SectionTitle">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:fontFamily">sans-serif-medium</item> <!-- 改为中等粗体 -->
+        <item name="android:textStyle">bold</item> <!-- 加粗 -->
+    </style>
+
+    <!-- EditText 样式 -->
+    <style name="EditTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/edittext_background</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <!-- Button 样式 -->
+    <style name="ButtonStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:background">@color/button_background</item>
+        <item name="android:textColor">@color/button_text_color</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:elevation">4dp</item>
+    </style>
+</resources>
