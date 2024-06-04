@@ -118,6 +118,7 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener {
                             //清除数据
                             UserSharedPreferences.getInstance().refreshUser(null);
                             UserSharedPreferences.getInstance().refreshToken(null);
+                            UserSharedPreferences.getInstance().refreshBotId(null);
                             //回到登录页面
                             Intent intent = new Intent(requireContext(), LoginActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

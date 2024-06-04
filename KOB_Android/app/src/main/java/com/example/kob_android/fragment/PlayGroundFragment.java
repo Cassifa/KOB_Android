@@ -45,7 +45,7 @@ import okio.ByteString;
  */
 public class PlayGroundFragment extends Fragment {
     View view;
-    MatchFragment matchFragment;
+    public MatchFragment matchFragment;
     UserActionFragment userActionFragment;
     MySurfaceView surfaceView;
     FrameLayout showingLayout;
@@ -60,6 +60,11 @@ public class PlayGroundFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @androidx.annotation.Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_playground, container, false);
         initView();
+        Bundle bundle = getArguments();
+        if (bundle != null && "MATCH_GAME".equals(bundle.getString("ACTION"))) {
+            // 开始匹配游戏
+            matchFragment.setQuickStart();
+        }
         return view;
     }
 
@@ -120,6 +125,7 @@ public class PlayGroundFragment extends Fragment {
                     throw new RuntimeException(e);
                 }
 
+                Log.i("kkk", msg);
                 //判断消息类型
                 switch (msg) {
                     case "start-matching":
@@ -152,8 +158,11 @@ public class PlayGroundFragment extends Fragment {
                             char c = map.charAt(i);
                             if (c == '0' || c == '1') newMap += c;
                         }
-                        if (a_id == Constant.getMyInfo().getId()) startGame(newMap, 0);
-                        else startGame(newMap, 1);
+                        int id = Constant.getMyInfo().getId();
+                        if (a_id == Constant.getMyInfo().getId())
+                            startGame(newMap, 0);
+                        else
+                            startGame(newMap, 1);
 
                         break;
                     //接到移动信息
@@ -253,6 +262,9 @@ public class PlayGroundFragment extends Fragment {
     private void startGame(String map, int myPlaceId) {
         StartGameInfo startGameInfo = new StartGameInfo(map, myPlaceId);
         surfaceView = new MySurfaceView(getActivity(), null, new Gson().toJson(startGameInfo));
+        Log.i("kkk", startGameInfo.toString());
+        Log.i("kkk", getActivity().toString());
+        Log.i("kkk", surfaceView.toString());
         updateMainArea(false);
     }
 
@@ -267,7 +279,9 @@ public class PlayGroundFragment extends Fragment {
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
             showActionArea(false);
-        } else {
+        }
+        //要进入游戏页面
+        else {
             requireActivity().runOnUiThread(() -> {
                 showingLayout.removeAllViews();
                 showingLayout.addView(surfaceView);

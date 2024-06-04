@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.kob_android.R;
+import com.example.kob_android.database.UserSharedPreferences;
 import com.example.kob_android.fragment.PlayGroundFragment;
 import com.example.kob_android.net.BotApiService;
 import com.example.kob_android.net.responseData.pojo.Bot;
@@ -53,6 +54,7 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
     View view;
     int checkedBot;
     boolean startMatch;
+    boolean quickStart = false;
 
     List<Bot> bots;
 
@@ -116,7 +118,6 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
 
     //修改开始匹配/停止匹配
     public void shift() {
-
         startMatch = !startMatch;
         if (startMatch) startGameBtn.setText("开始匹配");
         else startGameBtn.setText("取消匹配");
@@ -142,16 +143,26 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
 
         @Override
         protected void onPostExecute(List<Bot> botList) {
+            int defaultBot = 0;
+
             bots = botList;
             String[] botNameArray = new String[bots.size() + 1];
             botNameArray[0] = "亲自出马";
             for (int i = 0; i < bots.size(); i++) {
                 botNameArray[i + 1] = bots.get(i).getTitle();
+                if (quickStart && bots.get(i).getId().equals(UserSharedPreferences.getInstance().getBotId()))
+                    defaultBot = i + 1;
             }
             ArrayAdapter<String> botsAdapter =
                     new ArrayAdapter<>(requireActivity(), R.layout.item_optional_bots, botNameArray);
             botSpinner.setAdapter(botsAdapter);
-            botSpinner.setSelection(0);
+            botSpinner.setSelection(defaultBot);
+
+            if (quickStart) onClick(null);
         }
+    }
+
+    public void setQuickStart() {
+        quickStart = true;
     }
 }

@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 
 import com.example.kob_android.net.responseData.pojo.User;
 
-import java.util.Objects;
-
 /**
  * @Author: Cassifa
  * @CreateTime: 2024-06-03  22:32
@@ -46,23 +44,24 @@ public class UserSharedPreferences {
 
     public void refreshToken(String token) {
         SharedPreferences.Editor editor = preferences.edit();
-        if (token == null)
-            editor.remove("token");
-        else
-            editor.putString("token", token);
+        if (token == null) editor.remove("token");
+        else editor.putString("token", token);
         editor.apply();
     }
 
-    public void refreshBotId(int botId) {
+    public void refreshBotId(Integer botId) {
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("botId", botId);
+        if (botId == null) editor.remove("botId");
+        else editor.putInt("botId", botId);
         editor.apply();
     }
 
     public User getUser() {
-        Integer id = preferences.getString("id", null) == null ? null : Integer.getInteger(Objects.requireNonNull(preferences.getString("id", null)));
-        Integer rating = preferences.getString("rating", null) == null ? null : Integer.getInteger(Objects.requireNonNull(preferences.getString("rating", null)));
-
+        String stringId = preferences.getString("id", null);
+        String stringRating = preferences.getString("rating", null);
+        Integer id = null, rating = null;
+        if (stringId != null) id = Integer.valueOf(stringId);
+        if (stringRating != null) rating = Integer.valueOf(stringRating);
         return new User(
                 id,
                 preferences.getString("userName", null),
