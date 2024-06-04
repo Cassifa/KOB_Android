@@ -28,6 +28,7 @@ import com.google.gson.JsonSyntaxException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 
 import java.util.concurrent.TimeUnit;
 
@@ -238,6 +239,16 @@ public class PlayGroundFragment extends Fragment {
             // 解析 record 字段
             Record record = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss")
                     .create().fromJson(recordJsonString, Record.class);
+            JSONObject jsonObject = new JSONObject(recordJsonString);
+            record.setAid(jsonObject.getInt("AId"));
+            record.setAsx(jsonObject.getInt("ASx"));
+            record.setAsy(jsonObject.getInt("ASy"));
+            record.setAsteps(jsonObject.getString("ASteps"));
+
+            record.setBid(jsonObject.getInt("BId"));
+            record.setBsx(jsonObject.getInt("BSx"));
+            record.setBsy(jsonObject.getInt("BSy"));
+            record.setBsteps(jsonObject.getString("BSteps"));
 
             // 创建 RecordItem 对象
             RecordItem recordItem = new RecordItem();
@@ -245,6 +256,7 @@ public class PlayGroundFragment extends Fragment {
             recordItem.setA_username(item.getString("a_username"));
             recordItem.setB_photo(item.getString("b_photo"));
             recordItem.setB_username(item.getString("b_username"));
+
             recordItem.setRecord(record);
             recordItem.setResult(item.getString("result"));
 
@@ -262,9 +274,6 @@ public class PlayGroundFragment extends Fragment {
     private void startGame(String map, int myPlaceId) {
         StartGameInfo startGameInfo = new StartGameInfo(map, myPlaceId);
         surfaceView = new MySurfaceView(getActivity(), null, new Gson().toJson(startGameInfo));
-        Log.i("kkk", startGameInfo.toString());
-        Log.i("kkk", getActivity().toString());
-        Log.i("kkk", surfaceView.toString());
         updateMainArea(false);
     }
 
