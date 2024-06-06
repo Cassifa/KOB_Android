@@ -1,20 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!-- 文本标题 -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
         android:text="对局重现"
-        android:textSize="30dp">
-    </TextView>
-
-    <FrameLayout
-        android:id="@+id/surface_view_container"
+        android:textSize="30dp" />
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center" />
+        android:layout_height="1dp"
+        android:background="@color/black" />
+
+    <!-- 占位视图，高度为 40dp -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="180dp" />
+    <!-- SurfaceView 容器 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <!-- 左侧宽度为20dp的元素 -->
+        <View
+            android:layout_width="30dp"
+            android:layout_height="match_parent" />
+
+        <!-- SurfaceView 容器 -->
+        <FrameLayout
+            android:id="@+id/surface_view_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@android:color/white" />
+
+    </LinearLayout>
+
+
 </LinearLayout>

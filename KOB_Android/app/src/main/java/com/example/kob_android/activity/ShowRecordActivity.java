@@ -2,6 +2,7 @@ package com.example.kob_android.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.widget.FrameLayout;
 
 import androidx.annotation.Nullable;
@@ -25,8 +26,15 @@ public class ShowRecordActivity extends Activity {
         FrameLayout surfaceViewContainer = findViewById(R.id.surface_view_container);
 
         // 创建 MySurfaceView 并添加到容器中
-        MySurfaceView mySurfaceView = new MySurfaceView(this,recordData,null);
-        surfaceViewContainer.addView(mySurfaceView);
+        MySurfaceView mySurfaceView = new MySurfaceView(this, recordData, null);
 
+        // 设置 SurfaceView 的 LayoutParams
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT
+        );
+        layoutParams.gravity = Gravity.CENTER;
+        mySurfaceView.setLayoutParams(layoutParams);
+        surfaceViewContainer.addView(mySurfaceView);
     }
 }
