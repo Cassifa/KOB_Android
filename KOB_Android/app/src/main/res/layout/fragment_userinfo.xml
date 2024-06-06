@@ -99,4 +99,25 @@
         android:text="修改主题色"
         android:textSize="20sp"
         android:padding="16dp" />
+    <!-- 分割线 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black" />
+
+
+    <!-- 铭感词检测 -->
+    <TextView
+        android:id="@+id/info_sensitiveWords"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="敏感词检测"
+        android:textSize="20sp"
+        android:padding="16dp" />
+    <!-- 分割线 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black" />
 </LinearLayout>

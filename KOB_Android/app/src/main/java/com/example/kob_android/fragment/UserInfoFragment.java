@@ -50,6 +50,7 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener {
     TextView botList;
     TextView logout;
     TextView changeColor;
+    TextView sensitiveWords;
 
     @androidx.annotation.Nullable
     @Override
@@ -91,12 +92,14 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener {
         botList = view.findViewById(R.id.info_botList);
         logout = view.findViewById(R.id.info_logout);
         changeColor = view.findViewById(R.id.info_changeColor);
+        sensitiveWords=view.findViewById(R.id.info_sensitiveWords);
     }
 
     private void initListener() {
         botList.setOnClickListener(this);
         logout.setOnClickListener(this);
         changeColor.setOnClickListener(this);
+        sensitiveWords.setOnClickListener(this);
     }
 
     @Override
@@ -127,8 +130,10 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener {
                     })
                     .setNegativeButton("取消", null)
                     .show();
-        } else {
+        } else if(id==R.id.info_changeColor) {
             Log.i("aaa", "点了修改主题色");
+        }else {
+
         }
     }
 

@@ -1,24 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:text="ssss" />
+        android:layout_height="wrap_content"
+        android:text="ssss"
+        android:layout_marginBottom="16dp"
+        android:textSize="18sp"
+        android:textColor="#333333" />
 
     <ListView
         android:id="@+id/myBotsView"
         android:layout_width="match_parent"
-        android:layout_height="550dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="16dp" />
 
     <Button
         android:id="@+id/addBot"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="添加Bot"
-        android:textSize="24dp" />
+        android:textSize="18sp"
+        android:padding="12dp"
+        android:background="@android:color/holo_blue_light"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="16dp" />
 
 </LinearLayout>
