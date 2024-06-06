@@ -15,7 +15,7 @@
         android:layout_height="1dp"
         android:background="@color/black" />
 
-    <!-- 占位视图，高度为 40dp -->
+    <!-- 占位视图，高度为 180dp -->
     <View
         android:layout_width="match_parent"
         android:layout_height="180dp" />

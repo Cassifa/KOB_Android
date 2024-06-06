@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,35 +5,112 @@
     tools:context=".fragment.subFragment.UserActionFragment">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/up"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:text="上"
-            android:textSize="24dp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/left"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:text="左"
-            android:textSize="24dp" />
+            <!-- 上左 -->
+            <Button
+                android:id="@+id/top_left"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:text=""
+                android:textSize="24sp"
+                android:background="@android:color/transparent" />
 
-        <Button
-            android:id="@+id/right"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:text="右"
-            android:textSize="24dp" />
+            <!-- 上 -->
+            <Button
+                android:id="@+id/up"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:text="↑"
+                android:textSize="24sp"
+                android:background="@color/blue" />
 
-        <Button
-            android:id="@+id/down"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:text="下"
-            android:textSize="24dp" />
+            <!-- 上右 -->
+            <Button
+                android:id="@+id/top_right"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:text=""
+                android:textSize="24sp"
+                android:background="@android:color/transparent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- 左 -->
+            <Button
+                android:id="@+id/left"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:text="←"
+                android:textSize="24sp"
+                android:background="@color/red"/>
+
+            <!-- 中 -->
+            <Button
+                android:id="@+id/center"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:text=""
+                android:textSize="24sp"
+                android:background="@android:color/transparent" />
+
+            <!-- 右 -->
+            <Button
+                android:id="@+id/right"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:text="→"
+                android:textSize="24sp"
+                android:background="@color/red" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- 下左 -->
+            <Button
+                android:id="@+id/bottom_left"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:text=""
+                android:textSize="24sp"
+                android:background="@android:color/transparent" />
+
+            <!-- 下 -->
+            <Button
+                android:id="@+id/down"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:text="↓"
+                android:textSize="24sp"
+                android:background="@color/red" />
+
+            <!-- 下右 -->
+            <Button
+                android:id="@+id/bottom_right"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:text=""
+                android:textSize="24sp"
+                android:background="@android:color/transparent" />
+
+        </LinearLayout>
+
     </LinearLayout>
 </FrameLayout>

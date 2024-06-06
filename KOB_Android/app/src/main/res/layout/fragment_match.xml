@@ -1,75 +1,86 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="7">
+            android:layout_weight="7"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="200dp"
                 android:layout_weight="3"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/currentGameMyPhoto"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="3" />
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/circle_background" />
 
                 <TextView
                     android:id="@+id/currentGameMyName"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="自己"
-                    android:textSize="24dp" />
+                    android:textSize="24dp"
+                    android:textStyle="bold|italic"
+                    android:gravity="center" />
             </LinearLayout>
 
             <Spinner
                 android:id="@+id/currentGameBotsSpinner"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:minWidth="100dp"
                 android:layout_weight="2" />
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="200dp"
                 android:layout_weight="3"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/currentGameOpponentPhoto"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="3" />
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/circle_background" />
 
                 <TextView
                     android:id="@+id/currentGameOpponentName"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="对手"
-                    android:textSize="24dp" />
+                    android:textSize="24dp"
+                    android:textStyle="bold|italic"
+                    android:gravity="center" />
             </LinearLayout>
         </LinearLayout>
 
         <Button
             android:id="@+id/startNewGame"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:text="开始游戏"
-            android:textSize="24dp" />
+            android:textSize="24dp"
+            android:layout_marginTop="16dp" />
     </LinearLayout>
 
 </FrameLayout>

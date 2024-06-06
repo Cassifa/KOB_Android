@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KOB_Android</string>
+    <string name="app_name">King of Bots</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="app_version">version: 1.0</string>
