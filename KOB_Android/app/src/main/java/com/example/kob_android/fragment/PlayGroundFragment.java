@@ -28,7 +28,6 @@ import com.google.gson.JsonSyntaxException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONStringer;
 
 import java.util.concurrent.TimeUnit;
 
@@ -65,6 +64,7 @@ public class PlayGroundFragment extends Fragment {
         if (bundle != null && "MATCH_GAME".equals(bundle.getString("ACTION"))) {
             // 开始匹配游戏
             matchFragment.setQuickStart();
+            setArguments(null);
         }
         return view;
     }
@@ -144,7 +144,7 @@ public class PlayGroundFragment extends Fragment {
                         User opponent = new User();
                         opponent.setPhoto(opponent_photo);
                         opponent.setUsername((opponent_username));
-                        matchFragment.updateInfo(opponent, false);
+                        //matchFragment.updateInfo(opponent, false);
                         //开始游戏
                         int a_id;
                         String map;
@@ -269,7 +269,6 @@ public class PlayGroundFragment extends Fragment {
         }
     }
 
-
     //开始游戏
     private void startGame(String map, int myPlaceId) {
         StartGameInfo startGameInfo = new StartGameInfo(map, myPlaceId);
@@ -291,10 +290,14 @@ public class PlayGroundFragment extends Fragment {
         }
         //要进入游戏页面
         else {
-            requireActivity().runOnUiThread(() -> {
-                showingLayout.removeAllViews();
-                showingLayout.addView(surfaceView);
+            requireActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    showingLayout.removeAllViews();
+                    showingLayout.addView(surfaceView);
+                }
             });
+
             if (matchFragment.getCheckedBotId() == -1)
                 showActionArea(true);
         }
@@ -347,7 +350,7 @@ public class PlayGroundFragment extends Fragment {
 
     //取消匹配
     public void cancelMatch() {
-        updateMainArea(false);
+//        updateMainArea(false);
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("event", "stop-matching");

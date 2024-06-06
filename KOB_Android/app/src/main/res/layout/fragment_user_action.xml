@@ -12,14 +12,15 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <!-- 上左 -->
             <Button
                 android:id="@+id/top_left"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:text=""
                 android:textSize="24sp"
                 android:background="@android:color/transparent" />
@@ -28,7 +29,7 @@
             <Button
                 android:id="@+id/up"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:text="↑"
                 android:textSize="24sp"
                 android:background="@color/blue" />
@@ -37,7 +38,7 @@
             <Button
                 android:id="@+id/top_right"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:text=""
                 android:textSize="24sp"
                 android:background="@android:color/transparent" />
@@ -46,14 +47,15 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <!-- 左 -->
             <Button
                 android:id="@+id/left"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:text="←"
                 android:textSize="24sp"
                 android:background="@color/red"/>
@@ -62,7 +64,7 @@
             <Button
                 android:id="@+id/center"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:text=""
                 android:textSize="24sp"
                 android:background="@android:color/transparent" />
@@ -71,7 +73,7 @@
             <Button
                 android:id="@+id/right"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:text="→"
                 android:textSize="24sp"
                 android:background="@color/red" />
@@ -80,14 +82,15 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <!-- 下左 -->
             <Button
                 android:id="@+id/bottom_left"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:text=""
                 android:textSize="24sp"
                 android:background="@android:color/transparent" />
@@ -96,7 +99,7 @@
             <Button
                 android:id="@+id/down"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:text="↓"
                 android:textSize="24sp"
                 android:background="@color/red" />
@@ -105,7 +108,7 @@
             <Button
                 android:id="@+id/bottom_right"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:text=""
                 android:textSize="24sp"
                 android:background="@android:color/transparent" />

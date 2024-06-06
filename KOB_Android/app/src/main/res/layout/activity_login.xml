@@ -61,7 +61,7 @@
                 android:layout_margin="20dp"
                 android:background="@drawable/btn_style"
                 android:text="注册"
-                android:textColor="#5F6468"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <Button
@@ -71,7 +71,7 @@
                 android:layout_margin="20dp"
                 android:background="@drawable/btn_style"
                 android:text="登录"
-                android:textColor="#5F6468"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
         </LinearLayout>
 

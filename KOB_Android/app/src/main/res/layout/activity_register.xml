@@ -71,7 +71,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/btn_style"
                 android:text="确认注册"
-                android:textColor="#5F6468"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
         </LinearLayout>
 
