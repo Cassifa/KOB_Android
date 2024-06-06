@@ -11,7 +11,6 @@
         android:orientation="horizontal">
 
         <!-- 头像 -->
-        <!-- 头像 -->
         <ImageView
             android:id="@+id/info_userImage"
             android:layout_width="0dp"
@@ -32,11 +31,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:paddingStart="16dp"
                 android:text="昵称"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:gravity="center_vertical"
-                android:paddingStart="16dp"/>
+                android:textSize="50sp"
+                android:textStyle="bold|italic" />
 
             <!-- 积分 -->
             <TextView
@@ -44,11 +43,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:paddingStart="16dp"
                 android:text="积分: 100"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:gravity="center_vertical"
-                android:paddingStart="16dp"/>
+                android:textSize="50sp"
+                android:textStyle="bold|italic" />
         </LinearLayout>
     </LinearLayout>
 
@@ -64,9 +63,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:padding="16dp"
         android:text="我的Bot"
-        android:textSize="20sp"
-        android:padding="16dp" />
+        android:textSize="20sp" />
 
     <!-- 分割线 -->
     <View
@@ -80,9 +79,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:padding="16dp"
         android:text="退出登录"
-        android:textSize="20sp"
-        android:padding="16dp" />
+        android:textSize="20sp" />
 
     <!-- 分割线 -->
     <View
@@ -96,9 +95,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:padding="16dp"
         android:text="修改主题色"
-        android:textSize="20sp"
-        android:padding="16dp" />
+        android:textSize="20sp" />
     <!-- 分割线 -->
     <View
         android:layout_width="match_parent"
@@ -112,9 +111,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:padding="16dp"
         android:text="敏感词检测"
-        android:textSize="20sp"
-        android:padding="16dp" />
+        android:textSize="20sp" />
     <!-- 分割线 -->
     <View
         android:layout_width="match_parent"
