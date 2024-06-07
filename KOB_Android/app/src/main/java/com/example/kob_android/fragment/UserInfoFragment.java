@@ -7,12 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -92,7 +92,7 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener {
         botList = view.findViewById(R.id.info_botList);
         logout = view.findViewById(R.id.info_logout);
         changeColor = view.findViewById(R.id.info_changeColor);
-        sensitiveWords=view.findViewById(R.id.info_sensitiveWords);
+        sensitiveWords = view.findViewById(R.id.info_sensitiveWords);
     }
 
     private void initListener() {
@@ -130,11 +130,49 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener {
                     })
                     .setNegativeButton("取消", null)
                     .show();
-        } else if(id==R.id.info_changeColor) {
-            Log.i("aaa", "点了修改主题色");
-        }else {
+        } else if (id == R.id.info_changeColor) {
+            showColorSelectionDialog();
+        } else {
 
         }
+    }
+
+    private void showColorSelectionDialog() {
+        final String[] colors = {"红色", "蓝色"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("选择主题颜色");
+        builder.setItems(colors, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // 根据选择的颜色切换主题
+                if (which == 0) {
+                    // 选择了红色
+                    switchTheme("红色");
+                } else if (which == 1) {
+                    // 选择了蓝色
+                    switchTheme("蓝色");
+                }
+            }
+        });
+        builder.show();
+    }
+
+    private void switchTheme(String color) {
+        // 根据选择的颜色切换主题
+        if (color.equals("红色")) {
+            UserSharedPreferences.getInstance().refreshTheme("red");
+            Toast.makeText(getActivity(), "已经修改主题为红色，请重启应用以应用新主题。", Toast.LENGTH_LONG).show();
+            getActivity().setTheme(R.style.RedTheme);
+        } else if (color.equals("蓝色")) {
+            UserSharedPreferences.getInstance().refreshTheme("blue");
+            getActivity().setTheme(R.style.BlueTheme);
+            Toast.makeText(getActivity(), "已经修改主题为蓝色，请重启应用以应用新主题。", Toast.LENGTH_LONG).show();
+        }
+        // 重启Activity使主题生效
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        getActivity().finish();
+        startActivity(intent);
     }
 
 }

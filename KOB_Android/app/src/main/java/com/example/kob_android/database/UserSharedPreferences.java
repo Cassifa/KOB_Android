@@ -56,6 +56,12 @@ public class UserSharedPreferences {
         editor.apply();
     }
 
+    public void refreshTheme(String theme){
+        SharedPreferences.Editor editor=preferences.edit();
+        editor.putString("theme",theme);
+        editor.apply();
+    }
+
     public User getUser() {
         String stringId = preferences.getString("id", null);
         String stringRating = preferences.getString("rating", null);
@@ -69,6 +75,9 @@ public class UserSharedPreferences {
                 rating,
                 preferences.getString("photo", null)
         );
+    }
+    public String getTheme(){
+        return preferences.getString("theme","blue");
     }
 
     public String getToken() {

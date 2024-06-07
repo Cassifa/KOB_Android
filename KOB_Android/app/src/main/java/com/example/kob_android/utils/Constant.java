@@ -56,7 +56,7 @@ public class Constant {
 
 
     public static String getBackIpAddress() {
-        return "192.168.52.88";
+        return "192.168.6.88";
     }
 
     public static String getWebSocketUrl() {

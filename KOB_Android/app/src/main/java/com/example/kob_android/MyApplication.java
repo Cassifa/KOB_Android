@@ -24,6 +24,7 @@ public class MyApplication extends Application {
 
     public User user;
     public String token;
+    public String theme;
 
     public static MyApplication getInstance() {
         return mApp;
@@ -40,9 +41,13 @@ public class MyApplication extends Application {
     @Override
     //APP启动时
     public void onCreate() {
+        UserSharedPreferences.initInstance(this);
+        theme = UserSharedPreferences.getInstance().getTheme();
+        if (theme.equals("red")) setTheme(R.style.RedTheme);
+        else if (theme.equals("blue")) setTheme(R.style.BlueTheme);
+
         super.onCreate();
         mApp = this;
-        UserSharedPreferences.initInstance(this);
         //初始化数据
         token = UserSharedPreferences.getInstance().getToken();
         user = UserSharedPreferences.getInstance().getUser();

@@ -2,7 +2,7 @@
 <shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
     <shortcut
         android:enabled="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/pk_img"
         android:shortcutId="match_game"
         android:shortcutLongLabel="@string/long_label"
         android:shortcutShortLabel="@string/short_label">

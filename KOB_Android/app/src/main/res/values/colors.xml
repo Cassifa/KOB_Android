@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--红色主题-->
+    <color name="redPrimary">#FF0000</color>
+    <color name="redPrimaryDark">#CC0000</color>
+    <color name="redAccent">#FF4081</color>
+    <!--蓝色主题-->
+    <color name="bluePrimary">#2196F3</color>
+    <color name="bluePrimaryDark">#1976D2</color>
+    <color name="blueAccent">#6b9ac4</color>
+
+
     <color name="red">#FFFF0000</color>
     <color name="blue">#FF0000FF</color>
 
