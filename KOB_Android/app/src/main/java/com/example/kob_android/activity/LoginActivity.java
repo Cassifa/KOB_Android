@@ -118,8 +118,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     UserSharedPreferences preferences = UserSharedPreferences.getInstance();
                     preferences.refreshUser(user);
 
-                    Log.i("aakk", user.toString());
-
                     // 登录成功，跳转到 MainActivity 并清除当前任务栈
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

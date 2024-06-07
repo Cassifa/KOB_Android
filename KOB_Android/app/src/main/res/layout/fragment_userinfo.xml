@@ -34,6 +34,7 @@
                 android:gravity="center"
                 android:paddingStart="16dp"
                 android:text="昵称"
+                android:textColor="?attr/colorPrimaryDark"
                 android:textSize="50sp"
                 android:textStyle="bold|italic" />
 
@@ -46,6 +47,7 @@
                 android:gravity="center"
                 android:paddingStart="16dp"
                 android:text="积分: 100"
+                android:textColor="?attr/colorPrimaryDark"
                 android:textSize="50sp"
                 android:textStyle="bold|italic" />
         </LinearLayout>
@@ -61,8 +63,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/border_shape"> <!-- 添加边框 -->
+        android:background="@drawable/border_shape"
+        android:orientation="vertical"> <!-- 添加边框 -->
 
         <TextView
             android:id="@+id/info_botList"
@@ -85,8 +87,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/border_shape"> <!-- 添加边框 -->
+        android:background="@drawable/border_shape"
+        android:orientation="vertical"> <!-- 添加边框 -->
 
         <TextView
             android:id="@+id/info_logout"
@@ -109,8 +111,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/border_shape"> <!-- 添加边框 -->
+        android:background="@drawable/border_shape"
+        android:orientation="vertical"> <!-- 添加边框 -->
 
         <TextView
             android:id="@+id/info_changeColor"
@@ -133,8 +135,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/border_shape"> <!-- 添加边框 -->
+        android:background="@drawable/border_shape"
+        android:orientation="vertical"> <!-- 添加边框 -->
 
         <TextView
             android:id="@+id/info_sensitiveWords"

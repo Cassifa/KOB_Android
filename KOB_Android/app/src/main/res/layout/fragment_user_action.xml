@@ -31,8 +31,9 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="↑"
-                android:textSize="24sp"
-                android:background="@color/blue" />
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:background="?attr/colorAccent" />
 
             <!-- 上右 -->
             <Button
@@ -57,8 +58,9 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="←"
-                android:textSize="24sp"
-                android:background="@color/red"/>
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:background="?attr/colorAccent"/>
 
             <!-- 中 -->
             <Button
@@ -75,8 +77,9 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="→"
-                android:textSize="24sp"
-                android:background="@color/red" />
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:background="?attr/colorAccent" />
 
         </LinearLayout>
 
@@ -101,8 +104,9 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="↓"
-                android:textSize="24sp"
-                android:background="@color/red" />
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:background="?attr/colorAccent" />
 
             <!-- 下右 -->
             <Button

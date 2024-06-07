@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="自己"
-                    android:textSize="24dp"
+                    android:textSize="24sp"
                     android:textStyle="bold|italic" />
             </LinearLayout>
 
@@ -47,20 +47,26 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:minWidth="120dp"
+                android:minWidth="140dp"
                 android:orientation="vertical">
-
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="2" />
+
                 <Spinner
                     android:id="@+id/currentGameBotsSpinner"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="2"
-                    android:minWidth="140dp" />
+                    android:minWidth="140dp"
+                    android:ellipsize="none"
+                    android:singleLine="true"
+                    android:textSize="5sp"
+                    android:maxLines="1"
+                    android:scrollHorizontally="true"
+                    android:textColor="@android:color/black" />
 
                 <View
                     android:layout_width="match_parent"
@@ -87,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="对手"
-                    android:textSize="24dp"
+                    android:textSize="24sp"
                     android:textStyle="bold|italic" />
             </LinearLayout>
         </LinearLayout>
@@ -98,7 +104,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="开始游戏"
-            android:textSize="24dp" />
+            android:textStyle="bold|italic"
+            android:background="?attr/colorPrimaryDark"
+            android:textSize="24sp" />
     </LinearLayout>
-
 </FrameLayout>

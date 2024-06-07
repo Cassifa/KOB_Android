@@ -46,7 +46,7 @@ public class UserSharedPreferences {
         SharedPreferences.Editor editor = preferences.edit();
         if (token == null) editor.remove("token");
         else editor.putString("token", token);
-        editor.apply();
+        editor.commit();
     }
 
     public void refreshBotId(Integer botId) {
