@@ -66,7 +66,7 @@
             android:background="?attr/colorAccent"
             android:elevation="4dp"
             android:padding="16dp"
-            android:text="复制结果"
+            android:text="一键复制"
             android:textColor="@android:color/white"
             android:textSize="24sp"
             android:textStyle="bold|italic" />

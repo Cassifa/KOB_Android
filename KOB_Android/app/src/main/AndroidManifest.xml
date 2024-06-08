@@ -33,10 +33,11 @@
         <activity
             android:name=".activity.RegisterActivity"
             android:exported="false" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.ShowRecordActivity" />
         <activity android:name=".activity.ModifyMyBotActivity" />
         <activity android:name=".activity.SensitiveWordsActivity" />
+        <activity android:name="com.example.kob_android.activity.SensitiveWordActivity" />
     </application>
 
 </manifest>

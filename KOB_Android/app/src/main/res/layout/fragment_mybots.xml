@@ -4,13 +4,6 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ssss"
-        android:layout_marginBottom="16dp"
-        android:textSize="18sp"
-        android:textColor="#333333" />
 
     <ListView
         android:id="@+id/myBotsView"

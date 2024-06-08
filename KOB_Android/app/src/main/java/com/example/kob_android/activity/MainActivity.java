@@ -1,4 +1,4 @@
-package com.example.kob_android;
+package com.example.kob_android.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,13 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.kob_android.activity.LoginActivity;
+import com.example.kob_android.MyApplication;
+import com.example.kob_android.R;
 import com.example.kob_android.database.UserSharedPreferences;
 import com.example.kob_android.fragment.PlayGroundFragment;
 import com.example.kob_android.fragment.RankListFragment;
 import com.example.kob_android.fragment.RecordListFragment;
 import com.example.kob_android.fragment.UserInfoFragment;
-import com.example.kob_android.fragment.subFragment.MatchFragment;
 import com.example.kob_android.net.ListApiService;
 
 import javax.inject.Inject;

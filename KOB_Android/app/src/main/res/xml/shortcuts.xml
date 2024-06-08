@@ -8,7 +8,7 @@
         android:shortcutShortLabel="@string/short_label">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="com.example.kob_android.MainActivity"
+            android:targetClass="com.example.kob_android.activity.MainActivity"
             android:targetPackage="com.example.kob_android">
             <extra
                 android:name="ACTION"

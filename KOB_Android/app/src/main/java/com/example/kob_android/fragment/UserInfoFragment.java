@@ -16,9 +16,10 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.kob_android.MainActivity;
+import com.example.kob_android.activity.MainActivity;
 import com.example.kob_android.R;
 import com.example.kob_android.activity.LoginActivity;
+import com.example.kob_android.activity.SensitiveWordActivity;
 import com.example.kob_android.database.UserSharedPreferences;
 import com.example.kob_android.net.ApiService;
 import com.example.kob_android.utils.Constant;
@@ -133,9 +134,12 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener {
         } else if (id == R.id.info_changeColor) {
             showColorSelectionDialog();
         } else {
-
-        }
+        // 跳转到 SensitiveWordActivity
+        Intent intent = new Intent(requireContext(), SensitiveWordActivity.class);
+        startActivity(intent);
     }
+
+}
 
     private void showColorSelectionDialog() {
         final String[] colors = {"红色", "蓝色"};
@@ -168,11 +172,6 @@ public class UserInfoFragment extends Fragment implements View.OnClickListener {
             getActivity().setTheme(R.style.BlueTheme);
             Toast.makeText(getActivity(), "已经修改主题为蓝色，请重启应用以应用新主题。", Toast.LENGTH_LONG).show();
         }
-        // 重启Activity使主题生效
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        getActivity().finish();
-        startActivity(intent);
     }
 
 }
