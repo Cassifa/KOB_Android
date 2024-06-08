@@ -1,25 +1,37 @@
 package com.example.kob_android.activity;
 
-import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.kob_android.R;
+import com.example.kob_android.net.ApiService;
 
-/**
- * @Author: Cassifa
- * @CreateTime: 2024-06-08  21:46
- * @Description:
- */
-public class SensitiveWordActivity extends Activity implements View.OnClickListener {
+import java.util.Map;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+@AndroidEntryPoint
+public class SensitiveWordActivity extends AppCompatActivity implements View.OnClickListener {
+
+    @Inject
+    protected ApiService apiService;
     private EditText sensitiveWordInput;
     private TextView sensitiveWordOutput;
     private Button sensitiveWordBtn;
@@ -36,6 +48,7 @@ public class SensitiveWordActivity extends Activity implements View.OnClickListe
         // 设置按钮点击事件
         sensitiveWordBtn.setOnClickListener(this);
         sensitiveWordCopyBtn.setOnClickListener(this);
+
     }
 
     private void initializeViews() {
@@ -50,18 +63,31 @@ public class SensitiveWordActivity extends Activity implements View.OnClickListe
         int id = v.getId();
         if (id == R.id.sensitiveWord_btn) {
             String inputText = sensitiveWordInput.getText().toString();
-            // 发送文本到后端并接收返回的文本 (模拟)
-            String returnedText = sendTextToBackend(inputText);
-            sensitiveWordOutput.setText(returnedText);
+            sendTextToBackend(inputText);
         } else if (id == R.id.sensitiveWord_copy_btn) {
             copyTextToClipboard(sensitiveWordOutput.getText().toString());
         }
     }
 
-    private String sendTextToBackend(String inputText) {
-        // 在这里实现发送文本到后端并接收返回文本的逻辑
-        // 目前只是模拟返回相同的文本
-        return inputText;
+    private void sendTextToBackend(String inputText) {
+        apiService.sensitiveWord(inputText).enqueue(new Callback<Map<String, String>>() {
+            @Override
+            public void onResponse(Call<Map<String, String>> call, Response<Map<String, String>> response) {
+                if (response.body() != null) {
+                    getResponseCallback(response.body().get("msg"));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Map<String, String>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void getResponseCallback(String responseText) {
+        Log.i("aaa", responseText + "接收到了");
+        sensitiveWordOutput.setText(responseText);
     }
 
     private void copyTextToClipboard(String text) {
@@ -70,4 +96,6 @@ public class SensitiveWordActivity extends Activity implements View.OnClickListe
         clipboard.setPrimaryClip(clip);
         Toast.makeText(this, "已复制到剪贴板", Toast.LENGTH_SHORT).show();
     }
+
+
 }

@@ -1,6 +1,7 @@
 package com.example.kob_android.net;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -27,4 +28,7 @@ public interface ApiService {
 
     @GET("user/account/info/")
     Call<HashMap<String,String>> getinfo();
+
+    @GET("user/account/sensitiveWord/")
+    Call<Map<String,String>> sensitiveWord(@Query("text") String text);
 }

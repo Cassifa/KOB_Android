@@ -55,6 +55,15 @@ public class PlayGroundFragment extends Fragment {
     WebSocket mWebSocket;
     RecordItemDBHelper mHelper;
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mWebSocket != null) {
+            mWebSocket.cancel();
+            mWebSocket = null;
+        }
+    }
+
     @androidx.annotation.Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @androidx.annotation.Nullable ViewGroup container, Bundle savedInstanceState) {
