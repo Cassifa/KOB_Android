@@ -56,13 +56,10 @@ public class Constant {
 
 
     public static String getBackIpAddress() {
-        return "192.168.6.88";
+        return "10.136.13.117";
     }
 
     public static String getWebSocketUrl() {
         return "ws://" + getBackIpAddress() + ":3000/websocket/" + UserSharedPreferences.getInstance().getToken();
     }
-    //emulator>emulator.exe -avd Pixel_3a_API_34_extension_level_7_x86_64 -dns-server 8.8.8.8,172.16.7.10,172.16.7.30
-    //emulator -avd Medium_Phone_API_30 -dns-server 8.8.8.8,114.114.114.114
-    //emulator @Medium_Phone_API_34 -dns-server 8.8.8.8,114.114.114.114
 }
