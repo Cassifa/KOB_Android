@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.kob_android.R;
 import com.example.kob_android.database.UserSharedPreferences;
 import com.example.kob_android.net.ApiService;
-import com.example.kob_android.net.responseData.pojo.User;
+import com.example.kob_android.pojo.User;
 
 import java.util.HashMap;
 import java.util.Objects;

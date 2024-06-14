@@ -1,9 +1,8 @@
 package com.example.kob_android.net;
 
-import com.example.kob_android.net.responseData.pojo.Bot;
+import com.example.kob_android.pojo.Bot;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -11,7 +10,6 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 /**
  * @Author: Cassifa

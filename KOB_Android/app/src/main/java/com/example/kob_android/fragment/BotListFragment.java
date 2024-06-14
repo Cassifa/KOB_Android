@@ -15,7 +15,7 @@ import com.example.kob_android.R;
 import com.example.kob_android.activity.ModifyMyBotActivity;
 import com.example.kob_android.adapter.BotItemAdapter;
 import com.example.kob_android.net.BotApiService;
-import com.example.kob_android.net.responseData.pojo.Bot;
+import com.example.kob_android.pojo.Bot;
 
 import java.io.IOException;
 import java.util.ArrayList;

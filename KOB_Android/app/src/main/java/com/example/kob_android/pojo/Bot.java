@@ -1,12 +1,7 @@
-package com.example.kob_android.net.responseData.pojo;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+package com.example.kob_android.pojo;
 
 import java.util.Date;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -22,10 +17,10 @@ public class Bot {
     private String description;
     private String content;
     //格式控制
-//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
+    //    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
     //改时区
     private Date createtime;
-//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
+    //    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
     private Date modifytime;
 
     public Bot(Integer id, Integer userId, String title, String description, String content, Date createtime, Date modifytime) {

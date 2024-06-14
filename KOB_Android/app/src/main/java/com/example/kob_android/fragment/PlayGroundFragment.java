@@ -18,7 +18,7 @@ import com.example.kob_android.fragment.subFragment.MatchFragment;
 import com.example.kob_android.fragment.subFragment.UserActionFragment;
 import com.example.kob_android.gameObjects.MySurfaceView;
 import com.example.kob_android.gameObjects.infoUtils.StartGameInfo;
-import com.example.kob_android.net.responseData.pojo.User;
+import com.example.kob_android.pojo.User;
 import com.example.kob_android.pojo.Record;
 import com.example.kob_android.pojo.RecordItem;
 import com.example.kob_android.utils.Constant;

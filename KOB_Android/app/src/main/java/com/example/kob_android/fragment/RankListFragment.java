@@ -13,7 +13,7 @@ import com.example.kob_android.R;
 import com.example.kob_android.adapter.RankItemAdapter;
 import com.example.kob_android.net.ListApiService;
 import com.example.kob_android.net.responseData.RankListData;
-import com.example.kob_android.net.responseData.pojo.User;
+import com.example.kob_android.pojo.User;
 
 import java.io.IOException;
 import java.util.ArrayList;

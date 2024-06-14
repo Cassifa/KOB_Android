@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.kob_android.net.responseData.pojo.User;
+import com.example.kob_android.pojo.User;
 
 /**
  * @Author: Cassifa

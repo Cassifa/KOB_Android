@@ -1,6 +1,6 @@
 package com.example.kob_android.net.responseData;
 
-import com.example.kob_android.net.responseData.pojo.User;
+import com.example.kob_android.pojo.User;
 
 import java.util.LinkedList;
 

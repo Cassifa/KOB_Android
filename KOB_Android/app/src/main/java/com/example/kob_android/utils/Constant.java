@@ -8,7 +8,7 @@ import android.widget.ImageView;
 
 import com.example.kob_android.MyApplication;
 import com.example.kob_android.database.UserSharedPreferences;
-import com.example.kob_android.net.responseData.pojo.User;
+import com.example.kob_android.pojo.User;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,7 +56,7 @@ public class Constant {
 
 
     public static String getBackIpAddress() {
-        return "10.136.13.117";
+        return "192.168.62.88";
     }
 
     public static String getWebSocketUrl() {

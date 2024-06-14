@@ -1,4 +1,4 @@
-package com.example.kob_android.net.responseData.pojo;
+package com.example.kob_android.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

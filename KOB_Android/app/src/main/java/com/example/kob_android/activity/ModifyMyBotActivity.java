@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.kob_android.R;
 import com.example.kob_android.net.BotApiService;
-import com.example.kob_android.net.responseData.pojo.Bot;
+import com.example.kob_android.pojo.Bot;
 import com.google.gson.GsonBuilder;
 
 import java.util.HashMap;

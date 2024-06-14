@@ -17,8 +17,8 @@ import com.example.kob_android.R;
 import com.example.kob_android.database.UserSharedPreferences;
 import com.example.kob_android.fragment.PlayGroundFragment;
 import com.example.kob_android.net.BotApiService;
-import com.example.kob_android.net.responseData.pojo.Bot;
-import com.example.kob_android.net.responseData.pojo.User;
+import com.example.kob_android.pojo.Bot;
+import com.example.kob_android.pojo.User;
 import com.example.kob_android.utils.Constant;
 
 import java.io.IOException;

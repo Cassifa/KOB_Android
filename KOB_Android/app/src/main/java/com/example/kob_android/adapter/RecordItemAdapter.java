@@ -3,7 +3,6 @@ package com.example.kob_android.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,25 +12,13 @@ import android.widget.TextView;
 
 import com.example.kob_android.R;
 import com.example.kob_android.activity.ShowRecordActivity;
-import com.example.kob_android.gameObjects.infoUtils.Cell;
-import com.example.kob_android.net.ListApiService;
-import com.example.kob_android.net.responseData.RecordItemsData;
-import com.example.kob_android.net.responseData.pojo.User;
-import com.example.kob_android.pojo.Record;
 import com.example.kob_android.pojo.RecordItem;
 import com.example.kob_android.utils.Constant;
-import com.fasterxml.jackson.core.JsonFactoryBuilder;
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * @Author: Cassifa

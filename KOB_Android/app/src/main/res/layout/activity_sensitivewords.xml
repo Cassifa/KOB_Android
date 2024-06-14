@@ -20,7 +20,7 @@
             android:background="@android:color/white"
             android:elevation="4dp"
             android:gravity="top|start"
-            android:hint="请输入文本内容"
+            android:hint="请输入内容"
             android:padding="16dp"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/darker_gray"

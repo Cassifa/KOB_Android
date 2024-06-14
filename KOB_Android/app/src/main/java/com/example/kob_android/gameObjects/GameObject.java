@@ -73,8 +73,6 @@ public class GameObject {
         for (GameObject now : GameObject.list)
             if (now instanceof Snake)
                 now.render(canvas);
-        //        for(GameObject now:GameObject.list)
-        //                now.render(canvas);
     }
 
 }
