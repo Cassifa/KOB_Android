@@ -1,6 +1,6 @@
 # King of Bots(Android):联机在线AI对战游戏
 
-*注：此文档是King of Bots网页端及后端的说明文档，后端及网页端见：[Li Feifei / King of Bots · GitLab ](https://git.acwing.com/Cassifa/king-of-bob)*
+*注：此文档是King of Bots移动端的说明文档，后端及网页端见：[Cassifa / King of Bots · GitHub ](https://github.com/Cassifa/King-of-Bots)*
 
 ## 1.概述
 
